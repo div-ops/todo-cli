@@ -2,6 +2,14 @@
   "name": "@divops/todo-cli",
   "version": "0.0.2",
   "packageManager": "yarn@3.2.0",
+  "bin": {
+    "todo": "./bin/internal.js"
+  },
+  "publishConfig": {
+    "bin": {
+      "todo": "./dist/index.js"
+    }
+  },
   "scripts": {
     "dev": "node ./bin/internal.js",
     "build": "tsc -p tsconfig.json",
