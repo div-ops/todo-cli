@@ -1,0 +1,31 @@
+name: validate
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: setup node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '16'
+        registry-url: https://registry.npmjs.org/
+    - name: install deps and predeploy
+      run: |
+          yarn
+    - name: build 
+      run: |
+          rm -rf dist && yarn build
+    - name: version patch
+      run: |
+          yarn version patch
+          VERSION=$(node -p "require('./package.json').version")
+          echo "[skip ci] version up $VERSION"
