@@ -1,6 +1,6 @@
 {
   "name": "todo-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "yarn@3.2.0",
   "scripts": {
     "dev": "node ./bin/internal.js",
