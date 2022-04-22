@@ -1,0 +1,42 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: setup node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '16'
+        registry-url: https://registry.npmjs.org/
+    - name: install deps and predeploy
+      run: |
+          yarn
+    - name: build 
+      run: |
+          rm -rf dist && yarn build
+    - name: version patch
+      run: |
+          yarn version patch
+          VERSION=$(node -p "require('./package.json').version")
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "[skip ci] version up $VERSION"
+          git push origin main
+    - name: deploy 
+      env: 
+        NPM_AUTH_TOKEN: ${{ secrets.DIVOPS_NPM_TOKEN }}
+        NODE_AUTH_TOKEN: ${{secrets.DIVOPS_NPM_TOKEN}}
+        YARN_NPM_AUTH_TOKEN: ${{secrets.DIVOPS_NPM_TOKEN}}
+      run: |
+          yarn npm publish --access public
