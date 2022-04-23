@@ -5,7 +5,7 @@ export default function Demo() {
   return (
     <>
       <Box borderStyle="round" borderColor="green">
-        <Text>Hello, world!</Text>
+        <Text>Hello world!</Text>
       </Box>
     </>
   );
