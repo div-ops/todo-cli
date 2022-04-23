@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import extract from "extract-zip";
 import { useEffect, useState } from "react";
 
 export function useMainOption() {
@@ -17,7 +18,7 @@ export function useMainOption() {
           }
 
           setMessage("successfully installed");
-          return registerAlias("todo");
+          return await registerAlias("todo");
         }
 
         case "r":
@@ -45,18 +46,22 @@ async function unregisterAlias(alias: string) {
   console.log("removed");
 }
 
-function registerAlias(alias: string) {
+async function registerAlias(alias: string) {
   const appPath = getAppPath(alias);
   fs.writeFileSync(appPath, `yarn dlx -q @divops/todo-cli`);
   fs.chmodSync(appPath, 0o755);
 
+  const packagePath = path.resolve(__dirname, `..`, `..`, `..`, `..`, `..`);
+  console.log({ packagePath });
+
+  if (packagePath.endsWith("zip")) {
+    await extract(packagePath, { dir: path.dirname(packagePath) });
+    console.log(`done: ${path.dirname(packagePath)}`);
+  }
+
   // fs.writeFileSync(`${appPath}_v2`, `${__dirname}/../../../dist/index.js`);
   // fs.chmodSync(`${appPath}_v2`, 0o755);
   console.log("installed");
-  console.log({ __dirname });
-  console.log({
-    index: path.join(`${__dirname}`, `..`, `..`, `..`, `dist`, `index.js`),
-  });
 }
 
 function getAppPath(alias: string) {
