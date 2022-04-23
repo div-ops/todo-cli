@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import extract from "extract-zip";
 import { useEffect, useState } from "react";
 
 export function useMainOption() {
