@@ -1,11 +1,17 @@
 import { Box, Text } from "ink";
 import React from "react";
 
-export default function Demo() {
+interface Props {
+  message: string;
+}
+
+export default function Message(props: Props) {
   return (
     <>
       <Box borderStyle="round" borderColor="green">
-        <Text>Hello world!</Text>
+        <Box>
+          <Text>{props.message}</Text>
+        </Box>
       </Box>
     </>
   );
