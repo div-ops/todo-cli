@@ -49,7 +49,14 @@ function registerAlias(alias: string) {
   const appPath = getAppPath(alias);
   fs.writeFileSync(appPath, `yarn dlx -q @divops/todo-cli`);
   fs.chmodSync(appPath, 0o755);
+
+  // fs.writeFileSync(`${appPath}_v2`, `${__dirname}/../../../dist/index.js`);
+  // fs.chmodSync(`${appPath}_v2`, 0o755);
   console.log("installed");
+  console.log({ __dirname });
+  console.log({
+    index: path.join(`${__dirname}`, `..`, `..`, `..`, `dist`, `index.js`),
+  });
 }
 
 function getAppPath(alias: string) {
