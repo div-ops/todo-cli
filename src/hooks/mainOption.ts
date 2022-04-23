@@ -41,27 +41,30 @@ export function useMainOption() {
 }
 
 async function unregisterAlias(alias: string) {
+  const binFile = `/Users/${process.env?.["USER"]}/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js`;
+
   const appPath = getAppPath(alias);
+
   fs.rm(appPath, () => null);
-  console.log("removed");
+
+  console.log(`removed ${JSON.stringify({ binFile, appPath })}`);
 }
 
+// /Users/$USER/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js
 async function registerAlias(alias: string) {
+  const binFile = `/Users/${process.env?.["USER"]}/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js`;
   const appPath = getAppPath(alias);
-  fs.writeFileSync(appPath, `yarn dlx -q @divops/todo-cli`);
-  fs.chmodSync(appPath, 0o755);
 
-  const packagePath = path.resolve(__dirname, `..`, `..`, `..`, `..`, `..`);
-  console.log({ packagePath });
+  if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
+    fs.writeFileSync(appPath, `node ${binFile}`);
+    fs.chmodSync(appPath, 0o755);
 
-  if (packagePath.endsWith("zip")) {
-    await extract(packagePath, { dir: path.dirname(packagePath) });
-    console.log(`done: ${path.dirname(packagePath)}`);
+    console.log(`installed ${JSON.stringify({ binFile, appPath })}`);
+
+    return;
   }
 
-  // fs.writeFileSync(`${appPath}_v2`, `${__dirname}/../../../dist/index.js`);
-  // fs.chmodSync(`${appPath}_v2`, 0o755);
-  console.log("installed");
+  console.log(`not installed ${JSON.stringify({ binFile, appPath })}`);
 }
 
 function getAppPath(alias: string) {
