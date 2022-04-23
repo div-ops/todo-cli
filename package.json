@@ -15,7 +15,8 @@
     "dev": "node ./bin/internal.js",
     "build": "tsc -p tsconfig.json",
     "prepack": "yarn build",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "postpack": "node dist/index.js install"
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
