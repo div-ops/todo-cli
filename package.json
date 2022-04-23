@@ -11,6 +11,7 @@
     }
   },
   "scripts": {
+    "dev:watch": "nodemon -e ts,tsx --watch src ./bin/internal.js",
     "dev": "node ./bin/internal.js",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js"
@@ -18,7 +19,7 @@
   "dependencies": {
     "@babel/core": "^7.17.9",
     "@types/node": "^17.0.25",
-    "eslint": "^8.13.0",
+    "dotenv": "^16.0.0",
     "ink": "^3.2.0",
     "prettier": "^2.6.2",
     "react": "^17.0.2",
@@ -30,6 +31,10 @@
     "@types/eslint": "^8",
     "@types/prettier": "^2",
     "@types/react": "^17.0.2",
+    "eslint": "^8.14.0",
+    "eslint-config-next": "^12.1.5",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.7.0"
   }
 }

@@ -1,6 +1,5 @@
+import { render } from "ink";
 import React from "react";
-import { render, Text } from "ink";
+import App from "./components/App";
 
-const Demo = () => <Text>Hello World!</Text>;
-
-render(<Demo />);
+render(<App />);
