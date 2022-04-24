@@ -26,7 +26,7 @@
     "ink": "^3.2.0",
     "prettier": "^2.6.2",
     "react": "^17.0.2",
-    "react-dom": "^18.0.0",
+    "react-dom": "^17.0.2",
     "recoil": "^0.7.2",
     "typescript": "^4.6.3"
   },
@@ -37,7 +37,7 @@
     "@types/eslint": "^8",
     "@types/prettier": "^2",
     "@types/react": "^17.0.2",
-    "@types/react-dom": "^18",
+    "@types/react-dom": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.14.0",
