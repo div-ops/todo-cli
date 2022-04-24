@@ -67,7 +67,7 @@ export function useMainOption() {
           return router.push("message", {
             query: {
               message: taskList
-                .map((task) => `[${task.number}] ${task.name}`)
+                .map((task) => `#${task.number} ${task.name}`)
                 .join("\n"),
             },
           });
