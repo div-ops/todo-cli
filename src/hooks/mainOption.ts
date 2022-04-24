@@ -53,10 +53,10 @@ export function useMainOption() {
             });
           }
 
-          const number = tasker.delete({ number: Number(options[0]) });
+          const key = tasker.delete({ number: Number(options[0]) });
 
           return router.push("message", {
-            query: { message: `[success] #${number} is deleted` },
+            query: { message: `[success] ${key} is deleted` },
           });
         }
 
