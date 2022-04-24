@@ -93,7 +93,7 @@ export function useMainOption() {
                 message: taskList
                   .map(
                     (task) =>
-                      `${task.status === "done" ? "✅" : "☑️"} #${
+                      `${task.status === "done" ? "✅" : "☑️ "} #${
                         task.number
                       } ${task.name}`
                   )
