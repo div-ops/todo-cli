@@ -31,7 +31,7 @@ export function createJsonStorage<T>(storageName: string) {
 
     reset: () => {
       fs.rmSync(storagePath, { recursive: true });
-      fs.rmSync(getStoragePathFile(storageName));
+      fs.rmSync(path.join(__dirname, getStoragePathFile(storageName)));
     },
 
     set: (key: string, value: T) => {
