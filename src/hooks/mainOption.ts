@@ -62,6 +62,31 @@ export function useMainOption() {
           });
         }
 
+        case "undone": {
+          if (options[0] == null || isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const task = tasker.read({ number: Number(options[0]) });
+
+          if (task == null) {
+            return router.push("message", {
+              query: { message: "📝 지워진 할 일 입니다." },
+            });
+          }
+
+          const updated = tasker.update({
+            number: Number(options[0]),
+            status: "progress",
+          });
+
+          return router.push("message", {
+            query: { message: `✅ #${updated.number} progress` },
+          });
+        }
+
         case "r":
         case "remove": {
           if (options[0] == null || isNaN(Number(options[0]))) {
@@ -93,7 +118,7 @@ export function useMainOption() {
                 message: taskList
                   .map(
                     (task) =>
-                      `${task.status === "done" ? "✅" : "☑️ "} #${
+                      `${task.status === "done" ? "✅" : "🟩"} #${
                         task.number
                       } ${task.name}`
                   )
@@ -117,14 +142,55 @@ export function useMainOption() {
           }
 
           return router.push("message", {
-            query: { message: `📝 #${task.number} ${task.name}` },
+            query: {
+              message: [
+                `No ${task.number}.`,
+                `내용: ${task.name}`,
+                `상태: ${
+                  task.status === "done" ? "✅ done" : "🟩 in progress"
+                }`,
+                ...(task.link == null || task.link.length === 0
+                  ? []
+                  : [
+                      `링크: [\n${task.link
+                        .map((l) => `    ${l}`)
+                        .join("\n")}\n]`,
+                    ]),
+              ].join("\n"),
+            },
           });
         }
 
         case "ln":
         case "link": {
-          const message = `successfully link #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          if (options[0] == null || isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          if (options[1] == null || options[1] === "") {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const task = tasker.read({ number: Number(options[0]) });
+
+          if (task == null) {
+            return router.push("message", {
+              query: { message: "📝 지워진 할 일 입니다." },
+            });
+          }
+
+          const updated = tasker.update({
+            ...task,
+            link: [...(task?.link ?? []), options[1]],
+          });
+
+          return router.push("message", {
+            query: { message: `✅ #${updated.number} done` },
+          });
         }
 
         case "due": {
