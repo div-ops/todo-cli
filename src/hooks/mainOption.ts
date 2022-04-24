@@ -84,6 +84,14 @@ export function useMainOption() {
           return router.push("message", { query: { message } });
         }
 
+        case "reset": {
+          tasker.reset();
+
+          return router.push("message", {
+            query: { message: `[success] storage is deleted` },
+          });
+        }
+
         default: {
           const message = `process.argv: ${JSON.stringify(
             {

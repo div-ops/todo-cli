@@ -3,7 +3,11 @@ import { createJsonStorage } from "../clients/json-storage";
 interface Task {
   number: number;
   name: string;
-  contents: string;
+  status?: string;
+  contents?: string;
+  link?: string[];
+  // FIXME: convert to Date type
+  due?: string;
 }
 
 export function useTasker() {
@@ -11,6 +15,11 @@ export function useTasker() {
   const configStorage = createJsonStorage<Record<string, string>>("config");
 
   return {
+    reset: () => {
+      tasksStorage.reset();
+      configStorage.reset();
+    },
+
     create: (options: Pick<Task, "name" | "contents">) => {
       const total = configStorage.get("totalTaskCount") ?? 0;
       const number = total + 1;
@@ -41,7 +50,12 @@ export function useTasker() {
     },
 
     update: (options: Task) => {
-      return tasksStorage.set(`#${options.number}`, options);
+      const task = tasksStorage.get(`#${options.number}`);
+
+      return tasksStorage.set(`#${options.number}`, {
+        ...task,
+        ...options,
+      });
     },
 
     delete: (options: Pick<Task, "number">) => {
