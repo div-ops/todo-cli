@@ -104,6 +104,12 @@ export function useMainOption() {
           });
         }
 
+        case "base": {
+          return router.push("message", {
+            query: { message: `✅ base is ${tasker.base()}` },
+          });
+        }
+
         default: {
           const message = `process.argv: ${JSON.stringify(
             {

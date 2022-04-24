@@ -15,6 +15,9 @@ export function useTasker() {
   const configStorage = createJsonStorage<Record<string, string>>("config");
 
   return {
+    base: () => {
+      return [tasksStorage.base(), configStorage.base()].join("\n");
+    },
     reset: () => {
       tasksStorage.reset();
       configStorage.reset();
