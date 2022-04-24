@@ -5,6 +5,8 @@ export function useMainOption() {
   const [message, setMessage] = useState<string | undefined>();
   const [command, ...options] = getMainCommands();
 
+  console.log({ command, options });
+
   useEffect(() => {
     (async () => {
       switch (command) {
