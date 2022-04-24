@@ -1,5 +1,5 @@
 export function getMainCommands() {
-  const options = process.argv;
+  const options = [...process.argv];
 
   // pop node
   options.pop();
