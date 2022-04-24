@@ -1,23 +1,50 @@
 import { useEffect, useState } from "react";
-import { registerAlias, unregisterAlias } from "../utils";
+import { getMainCommands, registerAlias, unregisterAlias } from "../utils";
 
 export function useMainOption() {
   const [message, setMessage] = useState<string | undefined>();
-  const command = getMainOption();
+  const [command, ...options] = getMainCommands();
 
   useEffect(() => {
     (async () => {
       switch (command) {
-        case "i":
         case "install": {
           return setMessage(await registerAlias("todo"));
         }
 
-        case "r":
-        case "remove":
         case "uninstall": {
           return setMessage(await unregisterAlias("todo"));
         }
+
+        case "a":
+        case "add": {
+          return setMessage(`successfully add #1`);
+        }
+
+        case "d":
+        case "done": {
+          return setMessage(`successfully done #1`);
+        }
+
+        case "r":
+        case "remove": {
+          return setMessage(`successfully remove #1`);
+        }
+
+        case "l":
+        case "log": {
+          return setMessage(`successfully log #1`);
+        }
+
+        case "ln":
+        case "link": {
+          return setMessage(`successfully link #1`);
+        }
+
+        case "due": {
+          return setMessage(`successfully due #1`);
+        }
+
         default:
           return;
       }
@@ -29,14 +56,4 @@ export function useMainOption() {
   }, [command]);
 
   return message;
-}
-
-function getMainOption() {
-  console.log(`process.argv: ${JSON.stringify(process.argv, null, 2)}`);
-
-  if (process.argv.length <= 2) {
-    return null;
-  }
-
-  return process.argv[process.argv.length - 1];
 }
