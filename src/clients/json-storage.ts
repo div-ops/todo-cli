@@ -1,8 +1,12 @@
 import fs from "fs";
 import path from "path";
 
+function getStoragePathFile(storageName: string) {
+  return `STORAGE_PATH_${storageName.toUpperCase()}`;
+}
+
 function getStoragePath(storageName: string) {
-  const storagePathFile = `STORAGE_PATH_${storageName.toUpperCase()}`;
+  const storagePathFile = getStoragePathFile(storageName);
 
   if (fs.existsSync(path.join(__dirname, storagePathFile))) {
     return fs.readFileSync(path.join(__dirname, storagePathFile), "utf8");
@@ -23,6 +27,7 @@ export function createJsonStorage<T>(storageName: string) {
   return {
     reset: () => {
       fs.rmSync(storagePath, { recursive: true });
+      fs.rmSync(getStoragePathFile(storageName));
     },
 
     set: (key: string, value: T) => {
