@@ -71,14 +71,30 @@ export function useMainOption() {
 
         case "l":
         case "log": {
-          const taskList = tasker.readList();
+          if (options[0] == null) {
+            const taskList = tasker.readList();
+
+            return router.push("message", {
+              query: {
+                message:
+                  taskList
+                    .map((task) => `📝 #${task.number} ${task.name}`)
+                    .join("\n") ?? "📝 할 일이 없습니다.",
+              },
+            });
+          }
+
+          if (isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const task = tasker.read({ number: Number(options[0]) });
 
           return router.push("message", {
             query: {
-              message:
-                taskList
-                  .map((task) => `📝 #${task.number} ${task.name}`)
-                  .join("\n") ?? "📝 할 일이 없습니다.",
+              message: `📝 #${task.number} ${task.name}`,
             },
           });
         }
