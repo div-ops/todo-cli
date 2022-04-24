@@ -75,9 +75,10 @@ export function useMainOption() {
 
           return router.push("message", {
             query: {
-              message: taskList
-                .map((task) => `#${task.number} ${task.name}`)
-                .join("\n"),
+              message:
+                taskList
+                  .map((task) => `📝 #${task.number} ${task.name}`)
+                  .join("\n") ?? "📝 할 일이 없습니다.",
             },
           });
         }
