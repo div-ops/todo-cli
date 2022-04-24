@@ -1,72 +1,77 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getMainCommands, registerAlias, unregisterAlias } from "../utils";
+import { useRouter } from "./router";
 
 export function useMainOption() {
-  const [message, setMessage] = useState<string | undefined>();
+  const router = useRouter();
   const [command, ...options] = getMainCommands();
 
   useEffect(() => {
     (async () => {
       switch (command) {
         case "install": {
-          return setMessage(await registerAlias("todo"));
+          const message = await registerAlias("todo");
+          return router.push("message", { query: { message } });
         }
 
         case "uninstall": {
-          return setMessage(await unregisterAlias("todo"));
+          const message = await unregisterAlias("todo");
+          return router.push("message", { query: { message } });
         }
 
         case "a":
         case "add": {
-          return setMessage(`successfully add #1 [${options.join(" ")}]`);
+          const message = `successfully add #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         case "d":
         case "done": {
-          return setMessage(`successfully done #1 [${options.join(" ")}]`);
+          const message = `successfully done #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         case "r":
         case "remove": {
-          return setMessage(`successfully remove #1 [${options.join(" ")}]`);
+          const message = `successfully remove #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         case "l":
         case "log": {
-          return setMessage(`successfully log #1 [${options.join(" ")}]`);
+          const message = `successfully log #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         case "ln":
         case "link": {
-          return setMessage(`successfully link #1 [${options.join(" ")}]`);
+          const message = `successfully link #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         case "due": {
-          return setMessage(`successfully due #1 [${options.join(" ")}]`);
+          const message = `successfully due #1 [${options.join(" ")}]`;
+          return router.push("message", { query: { message } });
         }
 
         default: {
-          console.log(
-            `process.argv: ${JSON.stringify(
-              {
-                ["process.argv"]: process.argv,
-                ["command"]: command,
-                ["options"]: options,
-              },
-              null,
-              2
-            )}`
-          );
+          const message = `process.argv: ${JSON.stringify(
+            {
+              ["process.argv"]: process.argv,
+              ["command"]: command,
+              ["options"]: options,
+            },
+            null,
+            2
+          )}`;
 
-          return setMessage(`something was wrong...! plz check!`);
+          return router.push("message", { query: { message } });
         }
       }
     })().catch((error) => {
-      return setMessage(
-        JSON.stringify([error.message, error.stack].join("\n"))
-      );
+      const message = JSON.stringify([error.message, error.stack].join("\n"));
+
+      return router.push("message", { query: { message } });
     });
   }, [command]);
-
-  return message;
 }
