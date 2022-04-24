@@ -1,10 +1,10 @@
 export function getMainCommands() {
   const options = [...process.argv];
 
-  // pop node
-  options.pop();
-  // pop bin file
-  options.pop();
+  // unshift node
+  options.unshift();
+  // unshift bin file
+  options.unshift();
 
   if (options.length <= 0) {
     return [];
