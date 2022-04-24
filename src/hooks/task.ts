@@ -24,8 +24,18 @@ export function useTasker() {
     },
 
     create: (options: Pick<Task, "name" | "contents">) => {
-      const total = configStorage.get("totalTaskCount") ?? 0;
-      const number = total + 1;
+      const number = (() => {
+        const total = configStorage.get("global")?.total ?? 0;
+
+        const number = total + 1;
+
+        configStorage.set("global", {
+          ...configStorage.get("global"),
+          total: number,
+        });
+
+        return number;
+      })();
 
       return tasksStorage.set(`#${number}`, {
         number,
