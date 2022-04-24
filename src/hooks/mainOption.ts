@@ -18,31 +18,31 @@ export function useMainOption() {
 
         case "a":
         case "add": {
-          return setMessage(`successfully add #1`);
+          return setMessage(`successfully add #1 [${options.join(" ")}]`);
         }
 
         case "d":
         case "done": {
-          return setMessage(`successfully done #1`);
+          return setMessage(`successfully done #1 [${options.join(" ")}]`);
         }
 
         case "r":
         case "remove": {
-          return setMessage(`successfully remove #1`);
+          return setMessage(`successfully remove #1 [${options.join(" ")}]`);
         }
 
         case "l":
         case "log": {
-          return setMessage(`successfully log #1`);
+          return setMessage(`successfully log #1 [${options.join(" ")}]`);
         }
 
         case "ln":
         case "link": {
-          return setMessage(`successfully link #1`);
+          return setMessage(`successfully link #1 [${options.join(" ")}]`);
         }
 
         case "due": {
-          return setMessage(`successfully due #1`);
+          return setMessage(`successfully due #1 [${options.join(" ")}]`);
         }
 
         default:
