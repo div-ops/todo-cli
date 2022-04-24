@@ -44,13 +44,21 @@ export function useMainOption() {
             });
           }
 
-          const key = tasker.update({
+          const task = tasker.read({ number: Number(options[0]) });
+
+          if (task == null) {
+            return router.push("message", {
+              query: { message: "📝 지워진 할 일 입니다." },
+            });
+          }
+
+          const updated = tasker.update({
             number: Number(options[0]),
             status: "done",
           });
 
           return router.push("message", {
-            query: { message: `✅ ${key} done` },
+            query: { message: `✅ #${updated.number} done` },
           });
         }
 

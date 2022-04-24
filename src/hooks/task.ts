@@ -67,6 +67,7 @@ export function useTasker() {
       const task = tasksStorage.get(`#${options.number}`);
 
       const newTask = { ...task, ...options } as Task;
+
       if (newTask.number == null || newTask.name == null) {
         throw new Error("올바르지 않습니다.");
       }
