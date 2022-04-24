@@ -17,7 +17,7 @@ export async function registerAlias(alias: string) {
   if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
     const args = new Array(100)
       .fill(0)
-      .map((_, i) => `$${i + 1}`)
+      .map((_, i) => `$\{${i + 1}\}`)
       .join(" ")
       .trim();
 
