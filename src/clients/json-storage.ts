@@ -23,7 +23,6 @@ export function createJsonStorage<T>(storageName: string) {
   return {
     set: (key: string, value: T) => {
       const filePath = path.join(storagePath, key);
-      console.log(filePath);
 
       fs.writeFileSync(filePath, JSON.stringify(value));
 
@@ -32,7 +31,7 @@ export function createJsonStorage<T>(storageName: string) {
 
     get: (key: string) => {
       const filePath = path.join(storagePath, key);
-      console.log(filePath);
+
       if (fs.existsSync(filePath)) {
         return JSON.parse(fs.readFileSync(filePath, "utf8"));
       } else {
