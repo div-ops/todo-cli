@@ -10,6 +10,10 @@ export async function registerAlias(alias: string) {
     return `already exists ${JSON.stringify({ binFile, appPath })}.`;
   }
 
+  if (!fs.existsSync(binFile)) {
+    return `not exists ${JSON.stringify({ binFile })}.`;
+  }
+
   if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
     const args = new Array(100)
       .fill(0)
