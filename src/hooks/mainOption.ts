@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { getMainCommands, registerAlias, unregisterAlias } from "../utils";
 import { useRouter } from "./router";
+import { useTasker } from "./task";
 
 export function useMainOption() {
+  const tasker = useTasker();
   const router = useRouter();
   const [command, ...options] = getMainCommands();
 
@@ -21,8 +23,20 @@ export function useMainOption() {
 
         case "a":
         case "add": {
-          const message = `successfully add #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          if (options[0] == null) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const task = tasker.create({
+            name: options[0],
+            contents: options[1] ?? "",
+          });
+
+          return router.push("message", {
+            query: { message: `[success] #${task.number} ${task.name}` },
+          });
         }
 
         case "d":
@@ -33,14 +47,30 @@ export function useMainOption() {
 
         case "r":
         case "remove": {
-          const message = `successfully remove #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          if (options[0] == null || isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const number = tasker.delete({ number: Number(options[0]) });
+
+          return router.push("message", {
+            query: { message: `[success] #${number} is deleted` },
+          });
         }
 
         case "l":
         case "log": {
-          const message = `successfully log #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          const taskList = tasker.readList();
+
+          return router.push("message", {
+            query: {
+              message: taskList
+                .map((task) => `[${task.number}] ${task.name}`)
+                .join("\n"),
+            },
+          });
         }
 
         case "ln":
