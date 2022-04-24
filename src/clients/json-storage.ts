@@ -22,20 +22,18 @@ function getStoragePath(storageName: string) {
 }
 
 export function createJsonStorage<T>(storageName: string) {
-  const storagePath = getStoragePath(storageName);
-
   return {
     base: () => {
-      return storagePath;
+      return getStoragePath(storageName);
     },
 
     reset: () => {
-      fs.rmSync(storagePath, { recursive: true });
+      fs.rmSync(getStoragePath(storageName), { recursive: true });
       fs.rmSync(path.join(__dirname, getStoragePathFile(storageName)));
     },
 
     set: (key: string, value: T) => {
-      const filePath = path.join(storagePath, key);
+      const filePath = path.join(getStoragePath(storageName), key);
 
       fs.writeFileSync(filePath, JSON.stringify(value));
 
@@ -43,7 +41,7 @@ export function createJsonStorage<T>(storageName: string) {
     },
 
     get: (key: string) => {
-      const filePath = path.join(storagePath, key);
+      const filePath = path.join(getStoragePath(storageName), key);
 
       if (fs.existsSync(filePath)) {
         return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -53,7 +51,7 @@ export function createJsonStorage<T>(storageName: string) {
     },
 
     remove: (key: string) => {
-      const filePath = path.join(storagePath, key);
+      const filePath = path.join(getStoragePath(storageName), key);
 
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
