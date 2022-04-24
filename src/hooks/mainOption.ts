@@ -5,8 +5,6 @@ export function useMainOption() {
   const [message, setMessage] = useState<string | undefined>();
   const [command, ...options] = getMainCommands();
 
-  console.log({ command, options });
-
   useEffect(() => {
     (async () => {
       switch (command) {
@@ -47,8 +45,11 @@ export function useMainOption() {
           return setMessage(`successfully due #1 [${options.join(" ")}]`);
         }
 
-        default:
-          return;
+        default: {
+          console.log(`process.argv: ${JSON.stringify(process.argv, null, 2)}`);
+
+          return setMessage(`something was wrong...! plz check!`);
+        }
       }
     })().catch((error) => {
       return setMessage(

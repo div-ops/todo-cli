@@ -7,7 +7,6 @@ export function getMainCommands() {
   options.pop();
 
   if (options.length <= 0) {
-    console.log(`process.argv: ${JSON.stringify(process.argv, null, 2)}`);
     return [];
   }
 
