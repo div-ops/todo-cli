@@ -92,10 +92,14 @@ export function useMainOption() {
 
           const task = tasker.read({ number: Number(options[0]) });
 
+          if (task == null) {
+            return router.push("message", {
+              query: { message: "📝 지워진 할 일 입니다." },
+            });
+          }
+
           return router.push("message", {
-            query: {
-              message: `📝 #${task.number} ${task.name}`,
-            },
+            query: { message: `📝 #${task.number} ${task.name}` },
           });
         }
 

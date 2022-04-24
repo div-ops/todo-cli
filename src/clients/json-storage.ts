@@ -23,11 +23,11 @@ function getStoragePath(storageName: string) {
 
 export function createJsonStorage<T>(storageName: string) {
   return {
-    base: () => {
+    base: (): string => {
       return getStoragePath(storageName);
     },
 
-    reset: () => {
+    reset: (): void => {
       try {
         fs.rmSync(getStoragePath(storageName), { recursive: true });
       } catch {
@@ -40,7 +40,7 @@ export function createJsonStorage<T>(storageName: string) {
       }
     },
 
-    set: (key: string, value: T) => {
+    set: (key: string, value: T): T => {
       const filePath = path.join(getStoragePath(storageName), key);
 
       fs.writeFileSync(filePath, JSON.stringify(value));
@@ -48,7 +48,7 @@ export function createJsonStorage<T>(storageName: string) {
       return value;
     },
 
-    get: (key: string) => {
+    get: (key: string): T | null => {
       const filePath = path.join(getStoragePath(storageName), key);
 
       if (fs.existsSync(filePath)) {
@@ -58,7 +58,7 @@ export function createJsonStorage<T>(storageName: string) {
       }
     },
 
-    remove: (key: string) => {
+    remove: (key: string): string => {
       const filePath = path.join(getStoragePath(storageName), key);
 
       if (fs.existsSync(filePath)) {
