@@ -74,12 +74,17 @@ export function useMainOption() {
           if (options[0] == null) {
             const taskList = tasker.readList();
 
+            if (taskList.length === 0) {
+              return router.push("message", {
+                query: { message: "📝 할 일이 없습니다." },
+              });
+            }
+
             return router.push("message", {
               query: {
-                message:
-                  taskList
-                    .map((task) => `📝 #${task.number} ${task.name}`)
-                    .join("\n") ?? "📝 할 일이 없습니다.",
+                message: taskList
+                  .map((task) => `📝 #${task.number} ${task.name}`)
+                  .join("\n"),
               },
             });
           }
