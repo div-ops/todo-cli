@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getMainCommands, registerAlias, unregisterAlias } from "../utils";
+import { getOffsetFromYYYYMMDD, getYYYYMMDD } from "../utils/date";
 import { useRouter } from "./router";
 import { useTasker } from "./task";
 
@@ -116,11 +117,13 @@ export function useMainOption() {
             return router.push("message", {
               query: {
                 message: taskList
-                  .map(
-                    (task) =>
-                      `${task.status === "done" ? "✅" : "🟩"} #${
-                        task.number
-                      } ${task.name}`
+                  .map((task) =>
+                    [
+                      task.due ? `[D-${getOffsetFromYYYYMMDD(task.due)}]` : "",
+                      task.status === "done" ? "✅" : "🟩",
+                      `#${task.number}`,
+                      task.name,
+                    ].join(" ")
                   )
                   .join("\n"),
               },
@@ -144,11 +147,12 @@ export function useMainOption() {
           return router.push("message", {
             query: {
               message: [
-                `No ${task.number}.`,
+                `No.${task.number}`,
                 `내용: ${task.name}`,
                 `상태: ${
                   task.status === "done" ? "✅ done" : "🟩 in progress"
                 }`,
+                ...(task.due == null ? [] : [`기한: ${task.due} 까지`]),
                 ...(task.link == null || task.link.length === 0
                   ? []
                   : [
@@ -194,8 +198,34 @@ export function useMainOption() {
         }
 
         case "due": {
-          const message = `successfully due #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          if (options[0] == null || isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          if (options[1] == null || isNaN(Number(options[1]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const task = tasker.read({ number: Number(options[0]) });
+
+          if (task == null) {
+            return router.push("message", {
+              query: { message: "📝 지워진 할 일 입니다." },
+            });
+          }
+
+          const updated = tasker.update({
+            ...task,
+            due: getYYYYMMDD(Number(options[1])),
+          });
+
+          return router.push("message", {
+            query: { message: `✅ #${updated.number} updated` },
+          });
         }
 
         case "reset": {
