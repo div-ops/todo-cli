@@ -127,12 +127,12 @@ export function useMainOption() {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             `@divops/todo-cli ${require("../../package.json").version}`,
             ``,
-            `@divops/todo-cli를 사용해주셔서 감사합니다. 🙇‍♂️`,
+            `@divops/todo-cli를 사용해주셔서 감사합니다. 🙇`,
             ``,
-            `Repository 👉 https://github.com/div-ops/todo-cli`,
-            `Author 👉 https://github.com/creaticoding`,
             `Getting-Started 👉 https://github.com/div-ops/todo-cli/wiki/Getting-Started`,
+            `Repository 👉 https://github.com/div-ops/todo-cli`,
             `Bug Report 👉 https://github.com/div-ops/todo-cli/issues`,
+            `Author 👉 https://github.com/creaticoding`,
           ].join("\n");
 
           return router.push("message", { query: { message } });
