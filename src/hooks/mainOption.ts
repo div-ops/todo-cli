@@ -35,14 +35,26 @@ export function useMainOption() {
           });
 
           return router.push("message", {
-            query: { message: `[success] #${task.number} ${task.name}` },
+            query: { message: `✅ #${task.number} ${task.name}` },
           });
         }
 
         case "d":
         case "done": {
-          const message = `successfully done #1 [${options.join(" ")}]`;
-          return router.push("message", { query: { message } });
+          if (options[0] == null || isNaN(Number(options[0]))) {
+            return router.push("message", {
+              query: { message: "입력이 잘못되었습니다." },
+            });
+          }
+
+          const key = tasker.update({
+            number: Number(options[0]),
+            status: "done",
+          });
+
+          return router.push("message", {
+            query: { message: `✅ ${key} done` },
+          });
         }
 
         case "r":
@@ -56,7 +68,7 @@ export function useMainOption() {
           const key = tasker.delete({ number: Number(options[0]) });
 
           return router.push("message", {
-            query: { message: `[success] ${key} is deleted` },
+            query: { message: `✅ ${key} is deleted` },
           });
         }
 
@@ -88,7 +100,7 @@ export function useMainOption() {
           tasker.reset();
 
           return router.push("message", {
-            query: { message: `[success] storage is deleted` },
+            query: { message: `✅ storage is deleted` },
           });
         }
 

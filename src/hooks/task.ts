@@ -3,7 +3,7 @@ import { createJsonStorage } from "../clients/json-storage";
 interface Task {
   number: number;
   name: string;
-  status?: string;
+  status?: "progress" | "done" | "removed" | "holding";
   contents?: string;
   link?: string[];
   // FIXME: convert to Date type
@@ -28,6 +28,7 @@ export function useTasker() {
         number,
         name: options.name,
         contents: options.contents,
+        status: "progress",
       });
     },
 
@@ -49,7 +50,7 @@ export function useTasker() {
       return taskList;
     },
 
-    update: (options: Task) => {
+    update: (options: Partial<Task>) => {
       const task = tasksStorage.get(`#${options.number}`);
 
       return tasksStorage.set(`#${options.number}`, {
