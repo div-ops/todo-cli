@@ -11,7 +11,7 @@ export async function registerAlias(alias: string) {
   }
 
   if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
-    fs.writeFileSync(appPath, `node ${binFile}`);
+    fs.writeFileSync(appPath, `node ${binFile} $1 $2 $3 $4 $5 $6 $7 $8 $9`);
     fs.chmodSync(appPath, 0o755);
 
     return `installed ${JSON.stringify({ binFile, appPath })}.`;
