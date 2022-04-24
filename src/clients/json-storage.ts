@@ -22,8 +22,8 @@ function getStoragePath(storageName: string) {
 
   const storagePath = path.join(
     getUserDir(),
-    "todo-cli",
-    ".storage",
+    ".todo-cli",
+    "storage",
     storageName
   );
 
