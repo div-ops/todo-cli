@@ -29,10 +29,7 @@ export function useMainOption() {
             });
           }
 
-          const task = tasker.create({
-            name: options[0],
-            contents: options[1] ?? "",
-          });
+          const task = tasker.create({ name: options.join(" ") });
 
           return router.push("message", {
             query: { message: `✅ #${task.number} ${task.name}` },
