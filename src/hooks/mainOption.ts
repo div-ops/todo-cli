@@ -46,7 +46,17 @@ export function useMainOption() {
         }
 
         default: {
-          console.log(`process.argv: ${JSON.stringify(process.argv, null, 2)}`);
+          console.log(
+            `process.argv: ${JSON.stringify(
+              {
+                ["process.argv"]: process.argv,
+                ["command"]: command,
+                ["options"]: options,
+              },
+              null,
+              2
+            )}`
+          );
 
           return setMessage(`something was wrong...! plz check!`);
         }
