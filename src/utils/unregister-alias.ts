@@ -17,11 +17,14 @@ export async function registerAlias(alias: string) {
   if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
     const args = new Array(100)
       .fill(0)
-      .map((_, i) => `$${i}`)
+      .map((_, i) => `$${i + 1}`)
       .join(" ")
       .trim();
 
     fs.writeFileSync(appPath, `node ${binFile} ${args}`);
+
+    console.log(`node ${binFile} ${args}`);
+
     fs.chmodSync(appPath, 0o755);
 
     return `installed ${JSON.stringify({ binFile, appPath })}.`;
