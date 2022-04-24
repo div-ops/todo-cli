@@ -1,6 +1,14 @@
 import fs from "fs";
 import path from "path";
 
+function getUserDir() {
+  if (fs.existsSync(`/Users/${process.env?.["USER"]}`)) {
+    return `/Users/${process.env?.["USER"]}`;
+  }
+
+  return path.join(__dirname);
+}
+
 function getStoragePathFile(storageName: string) {
   return `STORAGE_PATH_${storageName.toUpperCase()}`;
 }
@@ -12,7 +20,12 @@ function getStoragePath(storageName: string) {
     return fs.readFileSync(path.join(__dirname, storagePathFile), "utf8");
   }
 
-  const storagePath = path.join(__dirname, ".storage", storageName);
+  const storagePath = path.join(
+    getUserDir(),
+    "todo-cli",
+    ".storage",
+    storageName
+  );
 
   fs.mkdirSync(storagePath, { recursive: true });
 

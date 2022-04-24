@@ -25,13 +25,13 @@ export function useTasker() {
 
     create: (options: Pick<Task, "name" | "contents">) => {
       const number = (() => {
-        const total = configStorage.get("global")?.total ?? 0;
+        const total = configStorage.get("global")?.["total"] ?? 0;
 
-        const number = total + 1;
+        const number = Number(total) + 1;
 
         configStorage.set("global", {
           ...configStorage.get("global"),
-          total: number,
+          total: String(number),
         });
 
         return number;
@@ -66,10 +66,12 @@ export function useTasker() {
     update: (options: Partial<Task>) => {
       const task = tasksStorage.get(`#${options.number}`);
 
-      return tasksStorage.set(`#${options.number}`, {
-        ...task,
-        ...options,
-      });
+      const newTask = { ...task, ...options } as Task;
+      if (newTask.number == null || newTask.name == null) {
+        throw new Error("올바르지 않습니다.");
+      }
+
+      return tasksStorage.set(`#${options.number}`, newTask);
     },
 
     delete: (options: Pick<Task, "number">) => {
