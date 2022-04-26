@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getMainCommands, registerAlias, unregisterAlias } from "../utils";
-import { getOffsetFromYYYYMMDD, getYYYYMMDD } from "../utils/date";
+import { Dday, getYYYYMMDD } from "../utils/date";
 import { useRouter } from "./router";
 import { useTasker } from "./task";
 
@@ -137,7 +137,7 @@ export function useMainOption() {
                   })
                   .map((task) =>
                     [
-                      task.due ? `[D-${getOffsetFromYYYYMMDD(task.due)}]` : "",
+                      task.due ? `[${Dday(task.due)}]` : "",
                       task.status === "done" ? "✅" : "🟩",
                       `#${task.number}`,
                       task.name,

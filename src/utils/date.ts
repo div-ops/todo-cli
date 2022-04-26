@@ -25,3 +25,11 @@ export function getOffsetFromYYYYMMDD(yyyy_mm_dd: string) {
     Number(date.getTime() - today.getTime()) / 1000 / 3600 / 24
   );
 }
+
+export function Dday(yyyy_mm_dd: string) {
+  if (getOffsetFromYYYYMMDD(yyyy_mm_dd) < 0) {
+    return `D+${Math.abs(getOffsetFromYYYYMMDD(yyyy_mm_dd))}`;
+  } else {
+    return `D-${getOffsetFromYYYYMMDD(yyyy_mm_dd)}`;
+  }
+}
