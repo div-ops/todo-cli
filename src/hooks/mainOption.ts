@@ -116,34 +116,38 @@ export function useMainOption() {
 
             return router.push("message", {
               query: {
-                message: taskList
-                  .sort((taskA, taskB) => {
-                    if (taskA.due == null && taskB.due == null) {
-                      return 0;
-                    }
+                message: [
+                  `📆 https://calendar.google.com/`,
+                  ``,
+                  taskList
+                    .sort((taskA, taskB) => {
+                      if (taskA.due == null && taskB.due == null) {
+                        return 0;
+                      }
 
-                    if (taskA.due == null) {
-                      return 1;
-                    }
+                      if (taskA.due == null) {
+                        return 1;
+                      }
 
-                    if (taskB.due == null) {
-                      return -1;
-                    }
+                      if (taskB.due == null) {
+                        return -1;
+                      }
 
-                    return (
-                      new Date(taskA.due).getTime() -
-                      new Date(taskB.due).getTime()
-                    );
-                  })
-                  .map((task) =>
-                    [
-                      task.due ? `[${Dday(task.due)}]` : "",
-                      task.status === "done" ? "✅" : "🟩",
-                      `#${task.number}`,
-                      task.name,
-                    ].join(" ")
-                  )
-                  .join("\n"),
+                      return (
+                        new Date(taskA.due).getTime() -
+                        new Date(taskB.due).getTime()
+                      );
+                    })
+                    .map((task) =>
+                      [
+                        task.due ? `[${Dday(task.due)}]` : "",
+                        task.status === "done" ? "✅" : "🟩",
+                        `#${task.number}`,
+                        task.name,
+                      ].join(" ")
+                    )
+                    .join("\n"),
+                ].join("\n"),
               },
             });
           }
