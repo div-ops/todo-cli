@@ -49,10 +49,10 @@ export function useTasker() {
       return tasksStorage.get(`#${options.number}`);
     },
 
-    readList: (page = 1, perPage = 10) => {
+    readList: (page = 0, perPage = 10) => {
       const taskList: Task[] = [];
 
-      for (let num = (page - 1) * perPage; num < page * perPage; num++) {
+      for (let num = page * perPage; num < (page + 1) * perPage; num++) {
         const task = tasksStorage.get(`#${num + 1}`);
 
         if (task) {

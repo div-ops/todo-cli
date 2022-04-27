@@ -106,7 +106,7 @@ export function useMainOption() {
         case "l":
         case "log": {
           if (options[0] == null) {
-            const taskList = tasker.readList();
+            const taskList = tasker.readList(0, 30);
 
             if (taskList.length === 0) {
               return router.push("message", {
