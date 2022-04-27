@@ -21,9 +21,7 @@ export function getOffsetFromYYYYMMDD(yyyy_mm_dd: string) {
   const date = new Date(yyyy_mm_dd);
   const today = new Date();
 
-  return Math.floor(
-    Number(date.getTime() - today.getTime()) / 1000 / 3600 / 24
-  );
+  return Math.ceil(Number(date.getTime() - today.getTime()) / 1000 / 3600 / 24);
 }
 
 export function Dday(yyyy_mm_dd: string) {
