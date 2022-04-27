@@ -37,7 +37,8 @@ export function useMainOption() {
           });
         }
 
-        case "d":
+        case "in-review":
+        case "holding":
         case "done": {
           if (options[0] == null || isNaN(Number(options[0]))) {
             return router.push("message", {
@@ -55,7 +56,7 @@ export function useMainOption() {
 
           const updated = tasker.update({
             number: Number(options[0]),
-            status: "done",
+            status: command,
           });
 
           return router.push("message", {
@@ -141,7 +142,22 @@ export function useMainOption() {
                     .map((task) =>
                       [
                         task.due ? `[${Dday(task.due)}]` : "",
-                        task.status === "done" ? "✅" : "🟩",
+                        (() => {
+                          switch (task.status) {
+                            case "done":
+                              return `✅`;
+                            case "in-review":
+                              return `🌠`;
+                            case "progress":
+                              return task.due != null ? `🔥` : "💻";
+                            case "removed":
+                              return `🚫`;
+                            case "holding":
+                              return `⏹`;
+                            default:
+                              return `📝`;
+                          }
+                        })(),
                         `#${task.number}`,
                         task.name,
                       ].join(" ")

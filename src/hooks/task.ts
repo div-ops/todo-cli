@@ -3,7 +3,7 @@ import { createJsonStorage } from "../clients/json-storage";
 interface Task {
   number: number;
   name: string;
-  status?: "progress" | "done" | "removed" | "holding";
+  status?: "progress" | "in-review" | "done" | "removed" | "holding";
   contents?: string;
   link?: string[];
   // FIXME: convert to Date type
