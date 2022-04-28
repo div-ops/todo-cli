@@ -141,7 +141,9 @@ export function useMainOption() {
                     })
                     .map((task) =>
                       [
-                        task.due ? `[${Dday(task.due)}]` : "",
+                        task.status !== "done" && task.due
+                          ? `[${Dday(task.due)}]`
+                          : "",
                         (() => {
                           switch (task.status) {
                             case "done":
