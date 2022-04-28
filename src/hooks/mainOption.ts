@@ -122,6 +122,14 @@ export function useMainOption() {
                   ``,
                   taskList
                     .sort((taskA, taskB) => {
+                      if (taskA.status === "done") {
+                        return 1;
+                      }
+
+                      if (taskB.status === "done") {
+                        return -1;
+                      }
+
                       if (taskA.due == null && taskB.due == null) {
                         return 0;
                       }
