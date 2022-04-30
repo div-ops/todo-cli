@@ -74,21 +74,24 @@ export function createJsonStorage<T>({
   ) as string;
 
   return {
-    base: (): string => {
-      return getStoragePath({ profile, storageName });
-    },
-
     reset: (): void => {
       try {
         fs.rmSync(getStoragePath({ profile, storageName }), {
           recursive: true,
         });
+        console.log(`${getStoragePath({ profile, storageName })} is removed`);
       } catch {
         //
       }
       try {
         fs.rmSync(
           path.join(getUserDir(), getStoragePathFile({ profile, storageName }))
+        );
+        console.log(
+          `${path.join(
+            getUserDir(),
+            getStoragePathFile({ profile, storageName })
+          )} is removed`
         );
       } catch {
         //

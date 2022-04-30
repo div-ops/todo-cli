@@ -23,10 +23,6 @@ export function useTasker() {
       return setProfile(profile);
     },
 
-    base: () => {
-      return [tasksStorage.base(), configStorage.base()].join("\n");
-    },
-
     reset: () => {
       tasksStorage.reset();
       configStorage.reset();
