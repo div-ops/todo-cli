@@ -41,7 +41,7 @@ function getStoragePath({
     return fs.readFileSync(storagePathFile, "utf8");
   }
 
-  profile = DEFAULT_PROFILE ? "" : profile;
+  profile = profile === DEFAULT_PROFILE ? "" : profile;
 
   const storagePath = path.join(
     getUserDir(),
