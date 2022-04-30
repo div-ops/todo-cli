@@ -17,10 +17,15 @@ function getStoragePathFile({
   profile: string;
   storageName: string;
 }) {
-  return `STORAGE_PATH_${
-    (profile === DEFAULT_PROFILE ? "" : `${profile.toUpperCase()}_`) +
-    storageName.toUpperCase()
-  }`;
+  return path.join(
+    getUserDir(),
+    ".todo-cli",
+    "storage-config",
+    `STORAGE_PATH_${
+      (profile === DEFAULT_PROFILE ? "" : `${profile.toUpperCase()}_`) +
+      storageName.toUpperCase()
+    }`
+  );
 }
 
 function getStoragePath({
@@ -32,21 +37,27 @@ function getStoragePath({
 }) {
   const storagePathFile = getStoragePathFile({ profile, storageName });
 
-  if (fs.existsSync(path.join(__dirname, storagePathFile))) {
-    return fs.readFileSync(path.join(__dirname, storagePathFile), "utf8");
+  if (fs.existsSync(storagePathFile)) {
+    return fs.readFileSync(storagePathFile, "utf8");
   }
+
+  profile = DEFAULT_PROFILE ? "" : profile;
 
   const storagePath = path.join(
     getUserDir(),
     ".todo-cli",
     "storage",
-    profile === DEFAULT_PROFILE ? "" : profile,
+    profile,
     storageName
   );
 
   fs.mkdirSync(storagePath, { recursive: true });
 
-  fs.writeFileSync(path.join(__dirname, storagePathFile), storagePath);
+  if (!fs.existsSync(path.dirname(storagePathFile))) {
+    fs.mkdirSync(path.dirname(storagePathFile), { recursive: true });
+  }
+
+  fs.writeFileSync(storagePathFile, storagePath);
 
   return storagePath;
 }
@@ -77,7 +88,7 @@ export function createJsonStorage<T>({
       }
       try {
         fs.rmSync(
-          path.join(__dirname, getStoragePathFile({ profile, storageName }))
+          path.join(getUserDir(), getStoragePathFile({ profile, storageName }))
         );
       } catch {
         //
