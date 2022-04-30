@@ -1,4 +1,5 @@
 import { createJsonStorage } from "../clients/json-storage";
+import { useProfile } from "./profile";
 
 interface Task {
   number: number;
@@ -10,14 +11,22 @@ interface Task {
   due?: string;
 }
 
+type Dic = Record<string, string>;
+
 export function useTasker() {
-  const tasksStorage = createJsonStorage<Task>("tasks");
-  const configStorage = createJsonStorage<Record<string, string>>("config");
+  const [profile, setProfile] = useProfile();
+  const tasksStorage = createJsonStorage<Task>({ profile, name: "tasks" });
+  const configStorage = createJsonStorage<Dic>({ profile, name: "config" });
 
   return {
+    setProfile: (profile: string) => {
+      return setProfile(profile);
+    },
+
     base: () => {
       return [tasksStorage.base(), configStorage.base()].join("\n");
     },
+
     reset: () => {
       tasksStorage.reset();
       configStorage.reset();

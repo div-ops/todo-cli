@@ -61,6 +61,10 @@ export function useMainOption() {
           return await commander.reset();
         }
 
+        case "profile": {
+          return await commander.updateProfile({ options });
+        }
+
         default: {
           return commander.default();
         }

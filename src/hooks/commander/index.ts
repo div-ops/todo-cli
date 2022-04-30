@@ -4,6 +4,7 @@ import { useInstall } from "./install";
 import { useLink } from "./link";
 import { useLinkRemove } from "./link-remove";
 import { useLog } from "./log";
+import { useUpdateProfile } from "./profile";
 import { useRemove } from "./remove";
 import { useReset } from "./reset";
 import { useTodoAdd } from "./todo-add";
@@ -25,5 +26,6 @@ export function useCommander() {
     due: useDue(),
     reset: useReset(),
     default: useDefault(),
+    updateProfile: useUpdateProfile(),
   };
 }

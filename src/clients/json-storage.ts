@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { DEFAULT_PROFILE } from "../hooks/profile";
 
 function getUserDir() {
   if (fs.existsSync(`/Users/${process.env?.["USER"]}`)) {
@@ -9,12 +10,27 @@ function getUserDir() {
   return path.join(__dirname);
 }
 
-function getStoragePathFile(storageName: string) {
-  return `STORAGE_PATH_${storageName.toUpperCase()}`;
+function getStoragePathFile({
+  profile,
+  storageName,
+}: {
+  profile: string;
+  storageName: string;
+}) {
+  return `STORAGE_PATH_${
+    (profile === DEFAULT_PROFILE ? "" : `${profile.toUpperCase()}_`) +
+    storageName.toUpperCase()
+  }`;
 }
 
-function getStoragePath(storageName: string) {
-  const storagePathFile = getStoragePathFile(storageName);
+function getStoragePath({
+  profile,
+  storageName,
+}: {
+  profile: string;
+  storageName: string;
+}) {
+  const storagePathFile = getStoragePathFile({ profile, storageName });
 
   if (fs.existsSync(path.join(__dirname, storagePathFile))) {
     return fs.readFileSync(path.join(__dirname, storagePathFile), "utf8");
@@ -24,6 +40,7 @@ function getStoragePath(storageName: string) {
     getUserDir(),
     ".todo-cli",
     "storage",
+    profile === DEFAULT_PROFILE ? "" : profile,
     storageName
   );
 
@@ -34,27 +51,41 @@ function getStoragePath(storageName: string) {
   return storagePath;
 }
 
-export function createJsonStorage<T>(storageName: string) {
+export function createJsonStorage<T>({
+  profile: optionalProfile,
+  name: storageName,
+}: {
+  profile?: string;
+  name: string;
+}) {
+  const profile = (
+    optionalProfile === undefined ? DEFAULT_PROFILE : optionalProfile
+  ) as string;
+
   return {
     base: (): string => {
-      return getStoragePath(storageName);
+      return getStoragePath({ profile, storageName });
     },
 
     reset: (): void => {
       try {
-        fs.rmSync(getStoragePath(storageName), { recursive: true });
+        fs.rmSync(getStoragePath({ profile, storageName }), {
+          recursive: true,
+        });
       } catch {
         //
       }
       try {
-        fs.rmSync(path.join(__dirname, getStoragePathFile(storageName)));
+        fs.rmSync(
+          path.join(__dirname, getStoragePathFile({ profile, storageName }))
+        );
       } catch {
         //
       }
     },
 
     set: (key: string, value: T): T => {
-      const filePath = path.join(getStoragePath(storageName), key);
+      const filePath = path.join(getStoragePath({ profile, storageName }), key);
 
       fs.writeFileSync(filePath, JSON.stringify(value));
 
@@ -62,7 +93,7 @@ export function createJsonStorage<T>(storageName: string) {
     },
 
     get: (key: string): T | null => {
-      const filePath = path.join(getStoragePath(storageName), key);
+      const filePath = path.join(getStoragePath({ profile, storageName }), key);
 
       if (fs.existsSync(filePath)) {
         return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -72,7 +103,7 @@ export function createJsonStorage<T>(storageName: string) {
     },
 
     remove: (key: string): string => {
-      const filePath = path.join(getStoragePath(storageName), key);
+      const filePath = path.join(getStoragePath({ profile, storageName }), key);
 
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);

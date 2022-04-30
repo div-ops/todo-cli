@@ -113,6 +113,5 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
-STORAGE_PATH_TASKS
-STORAGE_PATH_CONFIG
+STORAGE_PATH_*
 .storage/
