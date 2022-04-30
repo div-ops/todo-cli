@@ -14,7 +14,7 @@ interface Task {
 type Dic = Record<string, string>;
 
 export function useTasker() {
-  const [profile, setProfile] = useProfile();
+  const [profile, , setProfile] = useProfile();
   const tasksStorage = createJsonStorage<Task>({ profile, name: "tasks" });
   const configStorage = createJsonStorage<Dic>({ profile, name: "config" });
 
