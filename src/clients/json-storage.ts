@@ -104,6 +104,10 @@ export function storageOf<T>({
         key
       );
 
+      if (!fs.existsSync(path.dirname(filePath))) {
+        await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
+      }
+
       await fs.promises.writeFile(filePath, JSON.stringify(value));
 
       return value;
