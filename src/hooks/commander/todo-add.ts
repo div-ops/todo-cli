@@ -6,7 +6,7 @@ export function useTodoAdd() {
   const tasker = useTasker();
   const router = useRouter();
 
-  return ({ options }: { options: string[] }) => {
+  return async ({ options }: { options: string[] }) => {
     const name = options.join(" ");
 
     if (name == null) {
@@ -15,7 +15,7 @@ export function useTodoAdd() {
       });
     }
 
-    const task = tasker.create({ name });
+    const task = await tasker.create({ name });
 
     return router.push("message", {
       query: { message: `✅ #${task.number} ${task.name}` },

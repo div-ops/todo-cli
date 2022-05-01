@@ -1,4 +1,4 @@
-import { createJsonStorage } from "../clients/json-storage";
+import { storageOf } from "../clients/json-storage";
 import { useProfile } from "./profile";
 
 interface Task {
@@ -14,35 +14,40 @@ interface Task {
 type Dic = Record<string, string>;
 
 export function useTasker() {
-  const [profile, , setProfile] = useProfile();
-  const tasksStorage = createJsonStorage<Task>({ profile, name: "tasks" });
-  const configStorage = createJsonStorage<Dic>({ profile, name: "config" });
+  const [getProfile, setProfile] = useProfile();
+  const StorageOf = (profile: string) => ({
+    task: storageOf<Task>({ profile, name: "tasks" }),
+    config: storageOf<Dic>({ profile, name: "config" }),
+  });
 
   return {
-    setProfile: (profile: string) => {
-      return setProfile(profile);
+    setProfile: async (profile: string) => {
+      return await setProfile(profile);
     },
 
-    reset: () => {
-      tasksStorage.reset();
-      configStorage.reset();
+    reset: async () => {
+      const [profile] = await getProfile();
+      await StorageOf(profile).task.reset();
+      await StorageOf(profile).config.reset();
     },
 
-    create: (options: Pick<Task, "name" | "contents">) => {
-      const number = (() => {
-        const total = configStorage.get("global")?.["total"] ?? 0;
+    create: async (options: Pick<Task, "name" | "contents">) => {
+      const [profile] = await getProfile();
+      const number = await (async () => {
+        const total =
+          (await StorageOf(profile).config.get("global"))?.["total"] ?? 0;
 
         const number = Number(total) + 1;
 
-        configStorage.set("global", {
-          ...configStorage.get("global"),
+        await StorageOf(profile).config.set("global", {
+          ...(await StorageOf(profile).config.get("global")),
           total: String(number),
         });
 
         return number;
       })();
 
-      return tasksStorage.set(`#${number}`, {
+      return StorageOf(profile).task.set(`#${number}`, {
         number,
         name: options.name,
         contents: options.contents,
@@ -50,16 +55,17 @@ export function useTasker() {
       });
     },
 
-    read: (options: Pick<Task, "number">) => {
-      return tasksStorage.get(`#${options.number}`);
+    read: async (options: Pick<Task, "number">) => {
+      const [profile] = await getProfile();
+      return await StorageOf(profile).task.get(`#${options.number}`);
     },
 
-    readList: (page = 0, perPage = 10) => {
+    readList: async (page = 0, perPage = 10) => {
+      const [profile] = await getProfile();
       const taskList: Task[] = [];
 
       for (let num = page * perPage; num < (page + 1) * perPage; num++) {
-        const task = tasksStorage.get(`#${num + 1}`);
-
+        const task = await StorageOf(profile).task.get(`#${num + 1}`);
         if (task) {
           taskList.push(task);
         }
@@ -68,8 +74,9 @@ export function useTasker() {
       return taskList;
     },
 
-    update: (options: Partial<Task>) => {
-      const task = tasksStorage.get(`#${options.number}`);
+    update: async (options: Partial<Task>) => {
+      const [profile] = await getProfile();
+      const task = await StorageOf(profile).task.get(`#${options.number}`);
 
       const newTask = { ...task, ...options } as Task;
 
@@ -77,11 +84,12 @@ export function useTasker() {
         throw new Error("올바르지 않습니다.");
       }
 
-      return tasksStorage.set(`#${options.number}`, newTask);
+      return await StorageOf(profile).task.set(`#${options.number}`, newTask);
     },
 
-    delete: (options: Pick<Task, "number">) => {
-      return tasksStorage.remove(`#${options.number}`);
+    delete: async (options: Pick<Task, "number">) => {
+      const [profile] = await getProfile();
+      return await StorageOf(profile).task.remove(`#${options.number}`);
     },
   };
 }

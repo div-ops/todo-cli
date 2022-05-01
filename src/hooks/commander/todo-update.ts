@@ -5,14 +5,20 @@ export function useTodoUpdate() {
   const router = useRouter();
   const tasker = useTasker();
 
-  return ({ command, options }: { command: string; options: string[] }) => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
     if (options[0] == null || isNaN(Number(options[0]))) {
       return router.push("message", {
         query: { message: "입력이 잘못되었습니다." },
       });
     }
 
-    const task = tasker.read({ number: Number(options[0]) });
+    const task = await tasker.read({ number: Number(options[0]) });
 
     if (task == null) {
       return router.push("message", {
@@ -32,7 +38,7 @@ export function useTodoUpdate() {
       });
     }
 
-    const updated = tasker.update({
+    const updated = await tasker.update({
       number: Number(options[0]),
       status: command,
     });

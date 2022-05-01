@@ -3,15 +3,18 @@ import { useRouter } from "../router";
 
 export function useUpdateProfile() {
   const router = useRouter();
-  const [profile, list, setProfile, resetProfile] = useProfile();
+  const [getProfile, setProfile, resetProfile] = useProfile();
 
-  return ({ options }: { options: string[] }) => {
+  return async ({ options }: { options: string[] }) => {
+    const [profile, profileList] = await getProfile();
+
     if (options[0] == null) {
       return router.push("message", {
         query: {
-          message: [`profile: ${profile}`, `list: ${list.join(",")}`].join(
-            "\n"
-          ),
+          message: [
+            `profile: ${profile}`,
+            `profileList: ${profileList.join(",")}`,
+          ].join("\n"),
         },
       });
     }
@@ -30,7 +33,7 @@ export function useUpdateProfile() {
       query: {
         message: [
           `profile is updated to ${options[0]}`,
-          `list: ${[...new Set([...list, options[0]])].join(",")}`,
+          `list: ${[...new Set([...profileList, options[0]])].join(",")}`,
         ].join("\n"),
       },
     });

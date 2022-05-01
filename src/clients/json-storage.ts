@@ -28,7 +28,7 @@ function getStoragePathFile({
   );
 }
 
-function getStoragePath({
+async function getStoragePath({
   profile,
   storageName,
 }: {
@@ -38,7 +38,7 @@ function getStoragePath({
   const storagePathFile = getStoragePathFile({ profile, storageName });
 
   if (fs.existsSync(storagePathFile)) {
-    return fs.readFileSync(storagePathFile, "utf8");
+    return await fs.promises.readFile(storagePathFile, "utf8");
   }
 
   profile = profile === DEFAULT_PROFILE ? "" : profile;
@@ -51,32 +51,30 @@ function getStoragePath({
     storageName
   );
 
-  fs.mkdirSync(storagePath, { recursive: true });
+  await fs.promises.mkdir(storagePath, { recursive: true });
 
   if (!fs.existsSync(path.dirname(storagePathFile))) {
-    fs.mkdirSync(path.dirname(storagePathFile), { recursive: true });
+    await fs.promises.mkdir(path.dirname(storagePathFile), { recursive: true });
   }
 
-  fs.writeFileSync(storagePathFile, storagePath);
+  await fs.promises.writeFile(storagePathFile, storagePath);
 
   return storagePath;
 }
 
-export function createJsonStorage<T>({
+export function storageOf<T>({
   profile: optionalProfile,
   name: storageName,
 }: {
   profile?: string;
   name: string;
 }) {
-  const profile = (
-    optionalProfile === undefined ? DEFAULT_PROFILE : optionalProfile
-  ) as string;
+  const profile = optionalProfile ?? DEFAULT_PROFILE;
 
   return {
-    reset: (): void => {
+    reset: async () => {
       try {
-        fs.rmSync(getStoragePath({ profile, storageName }), {
+        await fs.promises.rm(await getStoragePath({ profile, storageName }), {
           recursive: true,
         });
         console.log(`${getStoragePath({ profile, storageName })} is removed`);
@@ -84,7 +82,7 @@ export function createJsonStorage<T>({
         //
       }
       try {
-        fs.rmSync(
+        await fs.promises.rm(
           path.join(getUserDir(), getStoragePathFile({ profile, storageName }))
         );
         console.log(
@@ -98,29 +96,38 @@ export function createJsonStorage<T>({
       }
     },
 
-    set: (key: string, value: T): T => {
-      const filePath = path.join(getStoragePath({ profile, storageName }), key);
+    set: async (key: string, value: T): Promise<T> => {
+      const filePath = path.join(
+        await getStoragePath({ profile, storageName }),
+        key
+      );
 
-      fs.writeFileSync(filePath, JSON.stringify(value));
+      await fs.promises.writeFile(filePath, JSON.stringify(value));
 
       return value;
     },
 
-    get: (key: string): T | null => {
-      const filePath = path.join(getStoragePath({ profile, storageName }), key);
+    get: async (key: string): Promise<T | null> => {
+      const filePath = path.join(
+        await getStoragePath({ profile, storageName }),
+        key
+      );
 
       if (fs.existsSync(filePath)) {
-        return JSON.parse(fs.readFileSync(filePath, "utf8"));
+        return JSON.parse(await fs.promises.readFile(filePath, "utf8"));
       } else {
         return null;
       }
     },
 
-    remove: (key: string): string => {
-      const filePath = path.join(getStoragePath({ profile, storageName }), key);
+    remove: async (key: string): Promise<string> => {
+      const filePath = path.join(
+        await getStoragePath({ profile, storageName }),
+        key
+      );
 
       if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
+        fs.promises.unlink(filePath);
       }
 
       return key;

@@ -1,17 +1,17 @@
-import { createJsonStorage } from "../clients/json-storage";
+import { storageOf } from "../clients/json-storage";
 
 export const DEFAULT_PROFILE = "default";
 
 type Dic = Record<string, string>;
 
 export function useProfile() {
-  const profileStorage = createJsonStorage<Dic>({ name: "profile" });
+  const profileStorage = storageOf<Dic>({ name: "profile" });
 
-  const setProfile = (profile: string) => {
-    const list = profileStorage.get("profile")?.["list"];
+  const setProfile = async (profile: string) => {
+    const list = (await profileStorage.get("profile"))?.["list"];
 
     if (list == null || list === "") {
-      return profileStorage.set("profile", {
+      return await profileStorage.set("profile", {
         name: profile,
         list: [DEFAULT_PROFILE, profile].join(","),
       });
@@ -20,17 +20,17 @@ export function useProfile() {
         ...new Set([DEFAULT_PROFILE, ...list.split(","), profile]),
       ];
 
-      return profileStorage.set("profile", {
+      return await profileStorage.set("profile", {
         name: profile,
         list: uniqueList.join(),
       });
     }
   };
 
-  const resetProfile = () => {
+  const resetProfile = async () => {
     const profile = DEFAULT_PROFILE;
 
-    profileStorage.set("profile", {
+    await profileStorage.set("profile", {
       name: profile,
       list: [profile].join(","),
     });
@@ -38,24 +38,32 @@ export function useProfile() {
     return [profile, [profile]] as const;
   };
 
-  const profile = profileStorage.get("profile");
+  const getProfile = async () => {
+    const profile = await profileStorage.get("profile");
 
-  if (profile != null) {
-    const { name, list } = profile;
+    if (
+      profile == null ||
+      profile === undefined ||
+      profile?.["name"] == null ||
+      profile?.["list"] == null
+    ) {
+      return [DEFAULT_PROFILE, [DEFAULT_PROFILE]] as const;
+    }
 
-    return [
-      //
-      name,
-      list?.split(",") ?? [],
-      setProfile,
-      resetProfile,
-    ] as const;
-  }
+    return [profile?.["name"], profile?.["list"]?.split(",")] as const;
+  };
 
-  return [
-    DEFAULT_PROFILE,
-    [DEFAULT_PROFILE],
-    setProfile,
-    resetProfile,
-  ] as const;
+  // if (profile != null) {
+  //   const { name, list } = profile;
+
+  //   return [
+  //     //
+  //     name,
+  //     list?.split(",") ?? [],
+  //     setProfile,
+  //     resetProfile,
+  //   ] as const;
+  // }
+
+  return [getProfile, setProfile, resetProfile] as const;
 }
