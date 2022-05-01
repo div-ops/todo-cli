@@ -6,9 +6,9 @@ export function useLog() {
   const router = useRouter();
   const tasker = useTasker();
 
-  return ({ options }: { options: string[] }) => {
+  return async ({ options }: { options: string[] }) => {
     if (options[0] == null) {
-      const taskList = tasker.readList(0, 30);
+      const taskList = await tasker.readList(0, 30);
 
       if (taskList.length === 0) {
         return router.push("message", {
@@ -84,7 +84,7 @@ export function useLog() {
       });
     }
 
-    const task = tasker.read({ number: Number(options[0]) });
+    const task = await tasker.read({ number: Number(options[0]) });
 
     if (task == null) {
       return router.push("message", {
