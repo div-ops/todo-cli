@@ -115,3 +115,5 @@ dist
 
 STORAGE_PATH_*
 .storage/
+
+.envrc
