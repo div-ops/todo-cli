@@ -1,6 +1,6 @@
 {
   "name": "@divops/todo-cli",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "packageManager": "yarn@3.2.0",
   "bin": {
     "todo": "./bin/internal.js"
