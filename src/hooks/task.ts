@@ -1,7 +1,7 @@
 import { storageOf } from "../clients/json-storage";
 import { useProfile } from "./profile";
 
-interface Task {
+export interface Task {
   number: number;
   name: string;
   status?: "progress" | "in-review" | "done" | "removed" | "holding";
@@ -11,7 +11,7 @@ interface Task {
   due?: string;
 }
 
-type Dic = Record<string, string>;
+export type Dic = Record<string, string>;
 
 export function useTasker() {
   const [getProfile, setProfile] = useProfile();
