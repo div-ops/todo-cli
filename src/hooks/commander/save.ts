@@ -36,7 +36,12 @@ export function useSave() {
       //
     }
 
-    const list = await tasker.readList();
+    const total = Number(
+      (await jsonStorage.config.get("global"))?.["total"] ?? 0
+    );
+
+    const list = await tasker.readList(0, total);
+
     for (const item of list) {
       await githubStorage.task.set(`#${item.number}`, item);
     }
