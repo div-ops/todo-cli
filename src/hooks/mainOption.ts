@@ -11,27 +11,9 @@ export function useMainOption() {
   useEffect(() => {
     (async () => {
       switch (command) {
-        case "install": {
-          return await commander.install();
-        }
-
-        case "uninstall": {
-          return await commander.uninstall();
-        }
-
         case "a":
         case "add": {
           return await commander.todoAdd({ options });
-        }
-
-        case "in-review":
-        case "holding":
-        case "done": {
-          return await commander.todoUpdate({ command, options });
-        }
-
-        case "undone": {
-          return await commander.undone({ options });
         }
 
         case "r":
@@ -53,20 +35,30 @@ export function useMainOption() {
           return await commander.linkRemove({ options });
         }
 
-        case "due": {
-          return await commander.due({ options });
+        case "undone": {
+          return await commander.undone({ options });
         }
 
-        case "reset": {
-          return await commander.reset();
+        case "due": {
+          return await commander.due({ options });
         }
 
         case "profile": {
           return await commander.updateProfile({ options });
         }
 
-        case "save": {
-          return await commander.save();
+        case "in-review":
+        case "holding":
+        case "done": {
+          return await commander.todoUpdate({ command, options });
+        }
+
+        case "install":
+        case "uninstall":
+        case "reset":
+        case "save":
+        case "load": {
+          return await commander[command]();
         }
 
         default: {

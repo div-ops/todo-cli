@@ -3,6 +3,7 @@ import { useDue } from "./due";
 import { useInstall } from "./install";
 import { useLink } from "./link";
 import { useLinkRemove } from "./link-remove";
+import { useLoad } from "./load";
 import { useLog } from "./log";
 import { useUpdateProfile } from "./profile";
 import { useRemove } from "./remove";
@@ -29,5 +30,6 @@ export function useCommander() {
     default: useDefault(),
     updateProfile: useUpdateProfile(),
     save: useSave(),
+    load: useLoad(),
   };
 }

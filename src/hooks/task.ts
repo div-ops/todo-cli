@@ -40,7 +40,6 @@ export function useTasker() {
 
       const number = await (async () => {
         const total = (await storage.config.get("global"))?.["total"] ?? 0;
-        console.log({ total });
 
         const number = Number(total) + 1;
 
