@@ -77,7 +77,9 @@ export function storageOf<T>({
         await fs.promises.rm(await getStoragePath({ profile, storageName }), {
           recursive: true,
         });
-        console.log(`${getStoragePath({ profile, storageName })} is removed`);
+        console.log(
+          `${await getStoragePath({ profile, storageName })} is removed`
+        );
       } catch {
         //
       }
