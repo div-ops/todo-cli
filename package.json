@@ -7,7 +7,7 @@
   },
   "publishConfig": {
     "bin": {
-      "todo": "./dist/index.js"
+      "todo": "node ./dist/index.js"
     }
   },
   "scripts": {
