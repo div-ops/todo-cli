@@ -53,6 +53,7 @@ export function useMainOption() {
           return await commander.todoUpdate({ command, options });
         }
 
+        case "storage":
         case "install":
         case "uninstall":
         case "reset":
