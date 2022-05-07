@@ -14,7 +14,7 @@ todo 를 관리할 수 있는 Command Line Interface 기반의 Tool 입니다. �
 
 - `npx -yes @divops/todo-cli uninstall`
 
-<img width="395" src="https://user-images.githubusercontent.com/33514304/167243364-c657e41c-3310-4034-8e2d-0f61f79557b4.png">
+<img width="395" src="https://user-images.githubusercontent.com/33514304/167244346-e54bf58f-ef92-4259-b738-66dc141d99c5.png">
 
 ### 3. Usage
 
