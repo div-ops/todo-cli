@@ -13,11 +13,13 @@ export function useMainOption() {
         return await commander["default"]?.({ command, options });
       }
 
-      if (command in commander) {
-        return await commander[command]?.({ command, options });
+      const action = commander[command];
+
+      if (action == null) {
+        return await commander["default"]?.({ command, options });
       }
 
-      return await commander["default"]?.({ command, options });
+      return await action({ command, options });
     })().catch((error) => {
       const message = JSON.stringify([error.message, error.stack].join("\n"));
 
