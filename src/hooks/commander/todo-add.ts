@@ -6,7 +6,15 @@ export function useTodoAdd() {
   const tasker = useTasker();
   const router = useRouter();
 
-  return async ({ options }: { options: string[] }) => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+
     const name = options.join(" ");
 
     if (name == null) {

@@ -5,7 +5,15 @@ export function useUpdateProfile() {
   const router = useRouter();
   const [getProfile, setProfile, resetProfile] = useProfile();
 
-  return async ({ options }: { options: string[] }) => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+
     const [profile, profileList] = await getProfile();
 
     if (options[0] == null) {

@@ -5,7 +5,16 @@ export function useReset() {
   const router = useRouter();
   const tasker = useTasker();
 
-  return async () => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+    options;
+
     await tasker.reset();
 
     return router.push("message", {

@@ -10,7 +10,16 @@ export function useSave() {
 
   const [getProfile] = useProfile();
 
-  return async () => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+    options;
+
     const [profile] = await getProfile();
 
     const jsonStorage = {

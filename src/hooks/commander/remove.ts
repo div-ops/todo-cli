@@ -5,7 +5,15 @@ export function useRemove() {
   const router = useRouter();
   const tasker = useTasker();
 
-  return async ({ options }: { options: string[] }) => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+
     if (options[0] == null || isNaN(Number(options[0]))) {
       return router.push("message", {
         query: { message: "입력이 잘못되었습니다." },

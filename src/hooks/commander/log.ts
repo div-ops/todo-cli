@@ -6,7 +6,15 @@ export function useLog() {
   const router = useRouter();
   const tasker = useTasker();
 
-  return async ({ options }: { options: string[] }) => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+
     if (options[0] == null) {
       const taskList = await tasker.readList(0, 30);
 

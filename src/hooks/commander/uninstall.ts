@@ -5,7 +5,16 @@ import { useRouter } from "../router";
 export function useUninstall() {
   const router = useRouter();
 
-  return async () => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+    options;
+
     const cwd = process.env?.["HOME"] ?? process.cwd();
 
     try {

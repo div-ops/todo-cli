@@ -3,7 +3,18 @@ import { useRouter } from "../router";
 export function useDefault() {
   const router = useRouter();
 
-  return () => {
+  return async (
+    {
+      command,
+      options,
+    }: {
+      command?: string;
+      options: string[];
+    } = { options: [] }
+  ) => {
+    command;
+    options;
+
     const message = [
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       `@divops/todo-cli ${require("../../../package.json").version}`,

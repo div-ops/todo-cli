@@ -4,7 +4,16 @@ import { useRouter } from "../router";
 export function useStorage() {
   const router = useRouter();
 
-  return async () => {
+  return async ({
+    command,
+    options,
+  }: {
+    command: string;
+    options: string[];
+  }) => {
+    command;
+    options;
+
     console.log(await shell("open $TODO_GITHUB_REPO"));
 
     return router.push("message", {
