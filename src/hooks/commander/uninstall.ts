@@ -27,7 +27,7 @@ export function useUninstall() {
     await exec("npx -yes clear-npx-cache", { cwd });
 
     return router.push("message", {
-      query: { message: "성공적으로 제거되었습니다. 🥲" },
+      query: { message: "성공적으로 제거되었습니다. 🥲 " },
     });
   };
 }
