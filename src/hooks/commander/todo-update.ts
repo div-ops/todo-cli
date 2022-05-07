@@ -44,7 +44,12 @@ export function useTodoUpdate() {
     });
 
     return router.push("message", {
-      query: { message: `✅ #${updated.number} done` },
+      query: {
+        message: [
+          `✅ Task below have been updated to ${command}.`,
+          `#${updated.number} "${updated.name}"`,
+        ].join("\n"),
+      },
     });
   };
 }

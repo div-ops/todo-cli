@@ -48,6 +48,8 @@ export function useMainOption() {
           return await commander.updateProfile({ options });
         }
 
+        case "progress":
+        case "removed":
         case "in-review":
         case "holding":
         case "done": {

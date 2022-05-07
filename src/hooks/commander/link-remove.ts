@@ -40,8 +40,8 @@ export function useLinkRemove() {
     return router.push("message", {
       query: {
         message: [
-          `✅ Task below have been completed.`,
-          `#${updated.number} "${updated.name}"`,
+          `✅ The link of task below have been removed.`,
+          `#${updated.number} ${options[1]}`,
         ].join("\n"),
       },
     });
