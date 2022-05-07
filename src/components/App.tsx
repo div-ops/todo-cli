@@ -10,11 +10,7 @@ function App() {
 
   switch (router.pathname) {
     case "message": {
-      return (
-        <Message
-          message={router.query?.["message"] ?? "message is not defined"}
-        />
-      );
+      return <Message message={router.query?.["message"] ?? "loading..."} />;
     }
 
     default: {

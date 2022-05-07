@@ -6,14 +6,16 @@ export function useInstall() {
   const router = useRouter();
 
   return async () => {
-    console.log(
-      await exec("yarn global add @divops/todo-cli", {
-        cwd: process.env?.["HOME"] ?? process.cwd(),
-      })
-    );
+    const cwd = process.env?.["HOME"] ?? process.cwd();
 
-    const message = await registerAlias("todo");
+    // install global package
+    await exec("yarn global add @divops/todo-cli", { cwd });
 
-    return router.push("message", { query: { message } });
+    // register alias "todo"
+    await registerAlias("todo");
+
+    return router.push("message", {
+      query: { message: "성공적으로 설치되었습니다 🎉" },
+    });
   };
 }

@@ -6,14 +6,15 @@ export function useUninstall() {
   const router = useRouter();
 
   return async () => {
+    const cwd = process.env?.["HOME"] ?? process.cwd();
+
     // const message = await unregisterAlias("todo");
 
-    console.log(
-      await exec("yarn global remove @divops/todo-cli", {
-        cwd: process.env?.["HOME"] ?? process.cwd(),
-      })
-    );
+    // uninstall global package
+    await exec("yarn global remove @divops/todo-cli", { cwd });
 
-    return router.push("message", { query: { message: "uninstalled" } });
+    return router.push("message", {
+      query: { message: "성공적으로 제거되었습니다 🥲" },
+    });
   };
 }
