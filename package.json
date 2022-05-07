@@ -13,7 +13,7 @@
   "scripts": {
     "dev:watch": "nodemon -e ts,tsx --watch src ./bin/internal.js",
     "dev": "node ./bin/internal.js",
-    "build": "tsc -p tsconfig.json && echo \"$(echo '#!/usr/bin/env node'; cat ./dist/index.js)\" > ./dist/index.js",
+    "build": "rm -rf dist && tsc -p tsconfig.json && echo \"$(echo '#!/usr/bin/env node'; cat ./dist/index.js)\" > ./dist/index.js",
     "prepack": "yarn build",
     "start": "node dist/index.js",
     "postpack": "node dist/index.js install"
