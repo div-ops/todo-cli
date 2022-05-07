@@ -22,14 +22,17 @@ todo 를 관리할 수 있는 Command Line Interface 기반의 Tool 입니다. �
 
 <img width="381" src="https://user-images.githubusercontent.com/33514304/167243515-3394cbd8-e7ed-4d09-874a-b91e66d8844a.png">
 
-
 - `todo log` or `todo l`
 
-<img width="395" alt="스크린샷 2022-05-07 16 20 10" src="https://user-images.githubusercontent.com/33514304/167243553-017d0b3b-97c1-4ea6-bd1a-7f4bb33903b3.png">
+<img width="395" src="https://user-images.githubusercontent.com/33514304/167243553-017d0b3b-97c1-4ea6-bd1a-7f4bb33903b3.png">
 
 - `todo log [Number]` or `todo l [Number]`
 
-<img width="395" alt="스크린샷 2022-05-07 16 22 00" src="https://user-images.githubusercontent.com/33514304/167243607-6a9de0d1-7374-4285-957f-9d5dd015487d.png">
+<img width="395" src="https://user-images.githubusercontent.com/33514304/167243607-6a9de0d1-7374-4285-957f-9d5dd015487d.png">
+
+- `todo done [Number]`
+
+<img width="437" src="https://user-images.githubusercontent.com/33514304/167244268-a32cff3d-fda8-4588-ae71-20bb8689d698.png">
 
 
 - `todo profile` or `todo p`
@@ -38,7 +41,7 @@ todo 를 관리할 수 있는 Command Line Interface 기반의 Tool 입니다. �
 
 - `todo profile [전환할 프로필]` or `todo p [전환할 프로필]`
 
-<img width="430" alt="스크린샷 2022-05-07 16 24 22" src="https://user-images.githubusercontent.com/33514304/167243680-54cb2cee-944d-4a95-817d-d8e70a7f606a.png">
+<img width="430" src="https://user-images.githubusercontent.com/33514304/167243680-54cb2cee-944d-4a95-817d-d8e70a7f606a.png">
 
 ### Feature
 
