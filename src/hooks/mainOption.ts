@@ -31,6 +31,10 @@ export function useMainOption() {
           return await commander.link({ options });
         }
 
+        case "text": {
+          return await commander.text({ options });
+        }
+
         case "link-remove": {
           return await commander.linkRemove({ options });
         }

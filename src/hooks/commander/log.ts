@@ -96,9 +96,12 @@ export function useLog() {
       query: {
         message: [
           `No.${task.number}`,
-          `내용: ${task.name}`,
+          `제목: ${task.name}`,
           `상태: ${task.status === "done" ? "✅ done" : "🟩 in progress"}`,
           ...(task.due == null ? [] : [`기한: ${task.due} 까지`]),
+          ...(task.text == null || task.text.length === 0
+            ? []
+            : [`내용: [\n${task.text.map((l) => `    ${l}`).join("\n")}\n]`]),
           ...(task.link == null || task.link.length === 0
             ? []
             : [`링크: [\n${task.link.map((l) => `    ${l}`).join("\n")}\n]`]),

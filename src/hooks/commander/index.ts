@@ -10,6 +10,7 @@ import { useRemove } from "./remove";
 import { useReset } from "./reset";
 import { useSave } from "./save";
 import { useStorage } from "./storage";
+import { useText } from "./text";
 import { useTodoAdd } from "./todo-add";
 import { useTodoUpdate } from "./todo-update";
 import { useUndone } from "./undone";
@@ -25,6 +26,7 @@ export function useCommander() {
     remove: useRemove(),
     log: useLog(),
     link: useLink(),
+    text: useText(),
     linkRemove: useLinkRemove(),
     due: useDue(),
     reset: useReset(),

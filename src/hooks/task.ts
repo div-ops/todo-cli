@@ -7,6 +7,7 @@ export interface Task {
   status?: "progress" | "in-review" | "done" | "removed" | "holding";
   contents?: string;
   link?: string[];
+  text?: string[];
   // FIXME: convert to Date type
   due?: string;
 }
