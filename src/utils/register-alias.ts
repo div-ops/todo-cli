@@ -12,7 +12,7 @@ export async function registerAlias(alias: string) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    if (error.message?.include("already exists")) {
+    if (error.message?.includes("already exists")) {
       return `installed ${JSON.stringify({ nodeBinPath: getNodeBinPath() })}.`;
     }
 
