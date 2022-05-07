@@ -43,6 +43,7 @@ export function useMainOption() {
           return await commander.due({ options });
         }
 
+        case "p":
         case "profile": {
           return await commander.updateProfile({ options });
         }
