@@ -1,4 +1,4 @@
-import { storageOf } from "../clients/json-storage";
+import { storageOf } from "@divops/utils-json-storage";
 import { useProfile } from "./profile";
 
 export interface Task {

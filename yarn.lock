@@ -349,6 +349,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@divops/utils-date": ^0.0.1
     "@divops/utils-github-storage": ^0.0.1
+    "@divops/utils-json-storage": ^0.0.1
     "@divops/utils-node-bin-alias": ^0.0.4
     "@divops/utils-node-bin-path": ^0.0.3
     "@divops/utils-shell": ^0.0.1
@@ -392,6 +393,13 @@ __metadata:
   dependencies:
     "@octokit/rest": ^18.12.0
   checksum: 840f12dff0747942a809dd3e214f062aab34375cfdb644415391ab7558809fe0946a4bc3b5837d97fe632ee0b8d6df9b5f1aa054efaf09adc50505a0b3423675
+  languageName: node
+  linkType: hard
+
+"@divops/utils-json-storage@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@divops/utils-json-storage@npm:0.0.1"
+  checksum: c15905bfa21efd6bebd6b6243f80bfb126e1ab13306aeeaa7a3eb52613a17868185f92de04aa375d1d93029c43e31f7e1f17dfc271ed93e4401f0d32a66a9bf1
   languageName: node
   linkType: hard
 

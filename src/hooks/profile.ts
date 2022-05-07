@@ -1,4 +1,4 @@
-import { storageOf } from "../clients/json-storage";
+import { storageOf } from "@divops/utils-json-storage";
 
 export const DEFAULT_PROFILE = "default";
 
