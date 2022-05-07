@@ -21,6 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.17.9",
     "@divops/utils-date": "^0.0.1",
+    "@divops/utils-github-storage": "^0.0.1",
     "@divops/utils-node-bin-alias": "^0.0.4",
     "@divops/utils-node-bin-path": "^0.0.3",
     "@divops/utils-shell": "^0.0.1",

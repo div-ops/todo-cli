@@ -1,4 +1,4 @@
-import { storageOf } from "../../clients/github-storage";
+import { storageOf } from "@divops/utils-github-storage";
 import { storageOf as jsonStorageOf } from "../../clients/json-storage";
 import { useProfile } from "../profile";
 import { useRouter } from "../router";
