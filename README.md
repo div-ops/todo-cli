@@ -9,7 +9,17 @@
 - Bug Report 👉 https://github.com/div-ops/todo-cli/issues
 - Author 👉 https://github.com/creaticoding
 
+### Install
 
+`npx @divops/todo-cli install`
+
+### Uninstall
+
+`npx @divops/todo-cli uninstall`
+
+### Usage
+
+#### `todo add`
 ### Feature
 
 - save/load 를 이용하면 github cloud를 통해 연동할 수 있습니다.
