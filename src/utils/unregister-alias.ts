@@ -10,7 +10,7 @@ export async function unregisterAlias(alias: string) {
     return `not exists ${JSON.stringify({ binFile, appPath })}.`;
   }
 
-  fs.rm(appPath, () => null);
+  await fs.promises.rm(appPath);
 
   return `removed ${JSON.stringify({ binFile, appPath })}.`;
 }
