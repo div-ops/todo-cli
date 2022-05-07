@@ -1,4 +1,4 @@
-import { getYYYYMMDD } from "../../utils/date";
+import { getYYYYMMDD } from "@divops/utils-date";
 import { useRouter } from "../router";
 import { useTasker } from "../task";
 

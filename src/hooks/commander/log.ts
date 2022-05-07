@@ -1,4 +1,4 @@
-import { Dday } from "../../utils/date";
+import { Dday } from "@divops/utils-date";
 import { useRouter } from "../router";
 import { useTasker } from "../task";
 

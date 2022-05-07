@@ -35,6 +35,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-react", "virtual:5db86df9394063141a48b3384b93a5dc90446db99e0c11df4056e917c39ab6863b94064b4b25c2f8da164549f2cfeca04b3dfe163c7d78e79972a2d437e19411#npm:7.16.7"],\
+            ["@divops/utils-date", "npm:0.0.1"],\
+            ["@divops/utils-node-bin-alias", "npm:0.0.4"],\
+            ["@divops/utils-node-bin-path", "npm:0.0.3"],\
+            ["@divops/utils-shell", "npm:0.0.1"],\
             ["@octokit/rest", "npm:18.12.0"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/babel__preset-env", "npm:7.9.2"],\
@@ -517,6 +521,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@divops/todo-cli", "workspace:."],\
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-react", "virtual:5db86df9394063141a48b3384b93a5dc90446db99e0c11df4056e917c39ab6863b94064b4b25c2f8da164549f2cfeca04b3dfe163c7d78e79972a2d437e19411#npm:7.16.7"],\
+            ["@divops/utils-date", "npm:0.0.1"],\
+            ["@divops/utils-node-bin-alias", "npm:0.0.4"],\
+            ["@divops/utils-node-bin-path", "npm:0.0.3"],\
+            ["@divops/utils-shell", "npm:0.0.1"],\
             ["@octokit/rest", "npm:18.12.0"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/babel__preset-env", "npm:7.9.2"],\
@@ -541,6 +549,43 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@divops/utils-date", [\
+        ["npm:0.0.1", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-date-npm-0.0.1-536610b530-c7168954df.zip/node_modules/@divops/utils-date/",\
+          "packageDependencies": [\
+            ["@divops/utils-date", "npm:0.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@divops/utils-node-bin-alias", [\
+        ["npm:0.0.4", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-node-bin-alias-npm-0.0.4-dffe7f8a19-fa524b481e.zip/node_modules/@divops/utils-node-bin-alias/",\
+          "packageDependencies": [\
+            ["@divops/utils-node-bin-alias", "npm:0.0.4"],\
+            ["@divops/utils-node-bin-path", "npm:0.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@divops/utils-node-bin-path", [\
+        ["npm:0.0.3", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-node-bin-path-npm-0.0.3-bef1188d6e-93d212805d.zip/node_modules/@divops/utils-node-bin-path/",\
+          "packageDependencies": [\
+            ["@divops/utils-node-bin-path", "npm:0.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@divops/utils-shell", [\
+        ["npm:0.0.1", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-shell-npm-0.0.1-d95eb57057-3bdae33498.zip/node_modules/@divops/utils-shell/",\
+          "packageDependencies": [\
+            ["@divops/utils-shell", "npm:0.0.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@eslint/eslintrc", [\

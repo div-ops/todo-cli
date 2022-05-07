@@ -1,34 +1,23 @@
-import fs from "fs";
-import { getAppPath } from "./get-app-path";
+import { registerNodeBinAlias } from "@divops/utils-node-bin-alias";
+import { getNodeBinPath } from "@divops/utils-node-bin-path";
 
 // /Users/$USER/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js
 export async function registerAlias(alias: string) {
-  const binFile = `/Users/${process.env?.["USER"]}/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js`;
-  const appPath = getAppPath(alias);
+  try {
+    const binFile = `/Users/${process.env?.["USER"]}/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js`;
 
-  if (fs.existsSync(appPath)) {
-    return `already exists ${JSON.stringify({ binFile, appPath })}.`;
+    await registerNodeBinAlias(alias, binFile);
+
+    return `installed ${JSON.stringify({ nodeBinPath: getNodeBinPath() })}.`;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.message?.include("already exists")) {
+      return `installed ${JSON.stringify({ nodeBinPath: getNodeBinPath() })}.`;
+    }
+
+    return `not installed ${JSON.stringify({
+      nodeBinPath: getNodeBinPath(),
+    })}.`;
   }
-
-  if (!fs.existsSync(binFile)) {
-    return `not exists ${JSON.stringify({ binFile })}.`;
-  }
-
-  if (process.env?.["USER"] != null && fs.existsSync(binFile)) {
-    const args = new Array(100)
-      .fill(0)
-      .map((_, i) => `$\{${i + 1}\}`)
-      .join(" ")
-      .trim();
-
-    fs.writeFileSync(appPath, `node ${binFile} ${args}`);
-
-    console.log(`node ${binFile} ${args}`);
-
-    fs.chmodSync(appPath, 0o755);
-
-    return `installed ${JSON.stringify({ binFile, appPath })}.`;
-  }
-
-  return `not installed ${JSON.stringify({ binFile, appPath })}.`;
 }

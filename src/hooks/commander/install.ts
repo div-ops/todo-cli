@@ -1,5 +1,5 @@
+import { shell } from "@divops/utils-shell";
 import { registerAlias } from "../../utils";
-import { exec } from "../../utils/exec";
 import { useRouter } from "../router";
 
 export function useInstall() {
@@ -9,7 +9,7 @@ export function useInstall() {
     const cwd = process.env?.["HOME"] ?? process.cwd();
 
     // install global package
-    await exec("yarn global add @divops/todo-cli", { cwd });
+    await shell("yarn global add @divops/todo-cli", { cwd });
 
     // register alias "todo"
     await registerAlias("todo");

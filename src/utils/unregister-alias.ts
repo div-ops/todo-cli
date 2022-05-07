@@ -1,16 +1,17 @@
-import fs from "fs";
-import { getAppPath } from "./get-app-path";
+import { unregisterNodeBinAlias } from "@divops/utils-node-bin-alias";
+import { getNodeBinPath } from "@divops/utils-node-bin-path";
 
 export async function unregisterAlias(alias: string) {
-  const binFile = `/Users/${process.env?.["USER"]}/.config/yarn/global/node_modules/\@divops/todo-cli/dist/index.js`;
+  try {
+    if (!(await unregisterNodeBinAlias(alias))) {
+      console.log(`Failed to unregister alias ${alias}`);
 
-  const appPath = getAppPath(alias);
+      return `not exists ${JSON.stringify({ nodeBinPath: getNodeBinPath() })}.`;
+    }
 
-  if (!fs.existsSync(appPath)) {
-    return `not exists ${JSON.stringify({ binFile, appPath })}.`;
+    return `removed ${JSON.stringify({ nodeBinPath: getNodeBinPath() })}.`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    return `[Error] ${error.message}`;
   }
-
-  await fs.promises.rm(appPath);
-
-  return `removed ${JSON.stringify({ binFile, appPath })}.`;
 }

@@ -347,6 +347,10 @@ __metadata:
   dependencies:
     "@babel/core": ^7.17.9
     "@babel/preset-react": ^7.16.7
+    "@divops/utils-date": ^0.0.1
+    "@divops/utils-node-bin-alias": ^0.0.4
+    "@divops/utils-node-bin-path": ^0.0.3
+    "@divops/utils-shell": ^0.0.1
     "@octokit/rest": ^18.12.0
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
@@ -373,6 +377,36 @@ __metadata:
     todo: ./bin/internal.js
   languageName: unknown
   linkType: soft
+
+"@divops/utils-date@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@divops/utils-date@npm:0.0.1"
+  checksum: c7168954df28d38336a31145e2d8a71e814a89c7089147bb241e2606e7c4139f97fd7a0b6d56a8deaa7b573096ae2c3139c2452524fef70ee9033f3dee90fd4c
+  languageName: node
+  linkType: hard
+
+"@divops/utils-node-bin-alias@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@divops/utils-node-bin-alias@npm:0.0.4"
+  dependencies:
+    "@divops/utils-node-bin-path": ^0.0.3
+  checksum: fa524b481e8035b54747a0bbe2841bdc8cfac9ed50f666d6a8496ddf70361d5f6e78885d517608f0c0b1156bdad534ba3cc8f44900d7c3f8201432333b69e374
+  languageName: node
+  linkType: hard
+
+"@divops/utils-node-bin-path@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@divops/utils-node-bin-path@npm:0.0.3"
+  checksum: 93d212805d3e050306bc58512436dcaace787c2d70bc82fae369ea5336f87ae975204ce85abd492a4d2ac77eda7d4b42e3a5479c43284d7bb2ecf189767d813b
+  languageName: node
+  linkType: hard
+
+"@divops/utils-shell@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@divops/utils-shell@npm:0.0.1"
+  checksum: 3bdae334989ab6c8cfbc23b0c03c783edfd1caec6a70cbb18140d535758f5da5e59aa0c14fdbe0b4153d98d981764711648c4984d95b22e6d16dcaacaf167caa
+  languageName: node
+  linkType: hard
 
 "@eslint/eslintrc@npm:^1.2.2":
   version: 1.2.2

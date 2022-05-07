@@ -1,5 +1,5 @@
+import { shell } from "@divops/utils-shell";
 import { unregisterAlias } from "../../utils";
-import { exec } from "../../utils/exec";
 import { useRouter } from "../router";
 
 export function useUninstall() {
@@ -13,10 +13,10 @@ export function useUninstall() {
       await unregisterAlias("todo");
 
       // uninstall global package
-      await exec("yarn global remove @divops/todo-cli", { cwd });
+      await shell("yarn global remove @divops/todo-cli", { cwd });
     } catch {
       // clear npx cache for remove todo-cli
-      await exec("npx -yes clear-npx-cache", { cwd });
+      await shell("npx -yes clear-npx-cache", { cwd });
 
       return router.push("message", {
         query: { message: "설치되어 있지 않습니다. 😕" },
@@ -24,7 +24,7 @@ export function useUninstall() {
     }
 
     // clear npx cache for remove todo-cli
-    await exec("npx -yes clear-npx-cache", { cwd });
+    await shell("npx -yes clear-npx-cache", { cwd });
 
     return router.push("message", {
       query: { message: "성공적으로 제거되었습니다. 🥲 " },

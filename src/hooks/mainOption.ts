@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import { getMainCommands } from "../utils";
 import { useCommander } from "./commander";
 import { useRouter } from "./router";
 
 export function useMainOption() {
   const router = useRouter();
   const commander = useCommander();
-  const [command, ...options] = getMainCommands();
+  const [command, ...options] = [...process.argv].slice(2);
 
   useEffect(() => {
     (async () => {
