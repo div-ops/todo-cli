@@ -1,10 +1,12 @@
 import { storageOf } from "@divops/utils-github-storage";
 import { storageOf as jsonStorageOf } from "@divops/utils-json-storage";
+import { APP_NAME } from "../../constants";
 import { useProfile } from "../profile";
 import { useRouter } from "../router";
 import { Dic, Task, useTasker } from "../task";
 
 export function useSave() {
+  const appName = APP_NAME;
   const tasker = useTasker();
   const router = useRouter();
 
@@ -23,14 +25,19 @@ export function useSave() {
     const [profile] = await getProfile();
 
     const jsonStorage = {
-      task: jsonStorageOf<Task>({ profile, name: "tasks" }),
-      config: jsonStorageOf<Dic>({ profile, name: "config" }),
+      task: jsonStorageOf<Task>({ appName, profile, name: "tasks" }),
+      config: jsonStorageOf<Dic>({ appName, profile, name: "config" }),
+    };
+
+    const context = {
+      repoEnvKey: "TODO_GITHUB_REPO",
+      tokenEnvKey: "TODO_GITHUB_TOKEN",
     };
 
     const githubStorage = {
-      root: storageOf({ name: profile }),
-      task: storageOf({ profile, name: "tasks" }),
-      config: storageOf({ profile, name: "config" }),
+      root: storageOf({ name: profile }, context),
+      task: storageOf({ profile, name: "tasks" }, context),
+      config: storageOf({ profile, name: "config" }, context),
     };
 
     try {

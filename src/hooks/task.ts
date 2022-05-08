@@ -1,4 +1,5 @@
 import { storageOf } from "@divops/utils-json-storage";
+import { APP_NAME } from "../constants";
 import { useProfile } from "./profile";
 
 export interface Task {
@@ -15,13 +16,14 @@ export interface Task {
 export type Dic = Record<string, string>;
 
 export function useTasker() {
+  const appName = APP_NAME;
   const [getProfile, setProfile] = useProfile();
   const promisedStorage = (async () => {
     const [profile] = await getProfile();
 
     return {
-      task: storageOf<Task>({ profile, name: "tasks" }),
-      config: storageOf<Dic>({ profile, name: "config" }),
+      task: storageOf<Task>({ appName, profile, name: "tasks" }),
+      config: storageOf<Dic>({ appName, profile, name: "config" }),
     };
   })();
 

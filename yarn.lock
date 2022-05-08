@@ -348,8 +348,8 @@ __metadata:
     "@babel/core": ^7.17.9
     "@babel/preset-react": ^7.16.7
     "@divops/utils-date": ^0.0.1
-    "@divops/utils-github-storage": ^0.0.1
-    "@divops/utils-json-storage": ^0.0.1
+    "@divops/utils-github-storage": ^0.0.2
+    "@divops/utils-json-storage": ^0.0.2
     "@divops/utils-node-bin-alias": ^0.0.4
     "@divops/utils-node-bin-path": ^0.0.3
     "@divops/utils-shell": ^0.0.1
@@ -387,19 +387,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@divops/utils-github-storage@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@divops/utils-github-storage@npm:0.0.1"
+"@divops/utils-github-storage@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@divops/utils-github-storage@npm:0.0.2"
   dependencies:
     "@octokit/rest": ^18.12.0
-  checksum: 840f12dff0747942a809dd3e214f062aab34375cfdb644415391ab7558809fe0946a4bc3b5837d97fe632ee0b8d6df9b5f1aa054efaf09adc50505a0b3423675
+  checksum: 2ed39a983f7506dd32a2c377f2f1724f0c86d14e81ee0f6597003604c0e1c0ae7bef7dfabc29da205a1a88e00f69118dcea170f2c8ed06927e966ea120faaea6
   languageName: node
   linkType: hard
 
-"@divops/utils-json-storage@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@divops/utils-json-storage@npm:0.0.1"
-  checksum: c15905bfa21efd6bebd6b6243f80bfb126e1ab13306aeeaa7a3eb52613a17868185f92de04aa375d1d93029c43e31f7e1f17dfc271ed93e4401f0d32a66a9bf1
+"@divops/utils-json-storage@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@divops/utils-json-storage@npm:0.0.2"
+  checksum: 44d395a2ef009b9fa0b6fd28800b58fdb2f60beaf76af30f2eafca760f92eda453c966a521020f8b98bb18afb37df82a572750eca6dba833688291044ee9a06a
   languageName: node
   linkType: hard
 

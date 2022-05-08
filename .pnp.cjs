@@ -36,8 +36,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-react", "virtual:5db86df9394063141a48b3384b93a5dc90446db99e0c11df4056e917c39ab6863b94064b4b25c2f8da164549f2cfeca04b3dfe163c7d78e79972a2d437e19411#npm:7.16.7"],\
             ["@divops/utils-date", "npm:0.0.1"],\
-            ["@divops/utils-github-storage", "npm:0.0.1"],\
-            ["@divops/utils-json-storage", "npm:0.0.1"],\
+            ["@divops/utils-github-storage", "npm:0.0.2"],\
+            ["@divops/utils-json-storage", "npm:0.0.2"],\
             ["@divops/utils-node-bin-alias", "npm:0.0.4"],\
             ["@divops/utils-node-bin-path", "npm:0.0.3"],\
             ["@divops/utils-shell", "npm:0.0.1"],\
@@ -524,8 +524,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-react", "virtual:5db86df9394063141a48b3384b93a5dc90446db99e0c11df4056e917c39ab6863b94064b4b25c2f8da164549f2cfeca04b3dfe163c7d78e79972a2d437e19411#npm:7.16.7"],\
             ["@divops/utils-date", "npm:0.0.1"],\
-            ["@divops/utils-github-storage", "npm:0.0.1"],\
-            ["@divops/utils-json-storage", "npm:0.0.1"],\
+            ["@divops/utils-github-storage", "npm:0.0.2"],\
+            ["@divops/utils-json-storage", "npm:0.0.2"],\
             ["@divops/utils-node-bin-alias", "npm:0.0.4"],\
             ["@divops/utils-node-bin-path", "npm:0.0.3"],\
             ["@divops/utils-shell", "npm:0.0.1"],\
@@ -565,20 +565,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@divops/utils-github-storage", [\
-        ["npm:0.0.1", {\
-          "packageLocation": "./.yarn/cache/@divops-utils-github-storage-npm-0.0.1-f3f85f39e7-840f12dff0.zip/node_modules/@divops/utils-github-storage/",\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-github-storage-npm-0.0.2-5bf5097637-2ed39a983f.zip/node_modules/@divops/utils-github-storage/",\
           "packageDependencies": [\
-            ["@divops/utils-github-storage", "npm:0.0.1"],\
+            ["@divops/utils-github-storage", "npm:0.0.2"],\
             ["@octokit/rest", "npm:18.12.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@divops/utils-json-storage", [\
-        ["npm:0.0.1", {\
-          "packageLocation": "./.yarn/cache/@divops-utils-json-storage-npm-0.0.1-7ce8531667-c15905bfa2.zip/node_modules/@divops/utils-json-storage/",\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/@divops-utils-json-storage-npm-0.0.2-0669782bcd-44d395a2ef.zip/node_modules/@divops/utils-json-storage/",\
           "packageDependencies": [\
-            ["@divops/utils-json-storage", "npm:0.0.1"]\
+            ["@divops/utils-json-storage", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -1,11 +1,13 @@
 import { storageOf } from "@divops/utils-json-storage";
+import { APP_NAME } from "../constants";
 
 export const DEFAULT_PROFILE = "default";
 
 type Dic = Record<string, string>;
 
 export function useProfile() {
-  const profileStorage = storageOf<Dic>({ name: "profile" });
+  const appName = APP_NAME;
+  const profileStorage = storageOf<Dic>({ appName, name: "profile" });
 
   const setProfile = async (profile: string) => {
     const list = (await profileStorage.get("profile"))?.["list"];
