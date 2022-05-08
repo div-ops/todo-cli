@@ -53,17 +53,5 @@ export function useProfile() {
     return [profile?.["name"], profile?.["list"]?.split(",")] as const;
   };
 
-  // if (profile != null) {
-  //   const { name, list } = profile;
-
-  //   return [
-  //     //
-  //     name,
-  //     list?.split(",") ?? [],
-  //     setProfile,
-  //     resetProfile,
-  //   ] as const;
-  // }
-
   return [getProfile, setProfile, resetProfile] as const;
 }
