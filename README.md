@@ -1,5 +1,7 @@
 # @divops/todo-cli
 
+[![npm version](https://badge.fury.io/js/@divops%2Ftodo-cli.svg)](https://badge.fury.io/js/@divops%2Ftodo-cli)
+
 ### 0. Overview
 
 todo 를 관리할 수 있는 Command Line Interface 기반의 Tool 입니다. 설치하면 `todo` 라는 alias 로 이용할 수 있습니다. 복잡한 기능보다 극단적인 단순함과 편리성을 목표로 개발하고 있습니다.
