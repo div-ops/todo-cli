@@ -1,6 +1,6 @@
 {
   "name": "@divops/todo-cli",
-  "version": "0.0.105",
+  "version": "0.0.106",
   "alias": "todo-cli",
   "packageManager": "yarn@3.2.0",
   "bin": {
